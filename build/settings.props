@@ -1,0 +1,38 @@
+<Project>
+
+  <PropertyGroup Label="Basic Settings">
+    <VersionPrefix>0.1.0-preview1</VersionPrefix>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);CS1591;NU1605;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Ownership Settings">
+    <Company>King David Consulting LLC</Company>
+    <Authors>kdcllc</Authors>
+    <Copyright>Copyright © King David Consulting LLC</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget Package Settings">
+    <Description>The DotNetCore Implementation of Shopify Admin Apis.</Description>
+    <PackageProjectUrl>https://github.com/kdcllc/Bet.Extensions.Shopify</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kdcllc/Bet.Extensions.Shopify.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicense>https://github.com/kdcllc/Bet.Extensions.Shopify/master/LICENSE</PackageLicense>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>dotnetcore, aspnetcore, dotnet, shopify</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Label="SourceLink Settings">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <DebugType>Embedded</DebugType>
+    <EmbedAllSources>True</EmbedAllSources>
+  </PropertyGroup>
+  
+</Project>

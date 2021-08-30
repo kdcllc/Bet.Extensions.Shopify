@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{87E4CCDB-AF23-4DCD-8A27-FED708AEF437}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{79C4F282-CB25-47E8-8342-25B5B80A2E96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{48B74BCB-30B5-4A0B-B65A-8A8F4AA11FDA}"
+	ProjectSection(SolutionItems) = preProject
+		build\dependencies.props = build\dependencies.props
+		build\settings.props = build\settings.props
+		build\sources.props = build\sources.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bet.Extensions.Shopify.UnitTest", "test\Bet.Extensions.Shopify.UnitTest\Bet.Extensions.Shopify.UnitTest.csproj", "{88548CBD-90E4-492B-808C-39123A5D5433}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E931287-DADE-4562-A680-EC2C410A8964}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		clean.sh = clean.sh
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bet.Extensions.Shopify.Abstractions", "src\Bet.Extensions.Shopify.Abstractions\Bet.Extensions.Shopify.Abstractions.csproj", "{7183DA2D-7A9A-40F4-BB6A-F58A6311D663}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bet.Extensions.Shopify.Models", "src\Bet.Extensions.Shopify.Models\Bet.Extensions.Shopify.Models.csproj", "{EC0AB363-969A-409E-A66F-879C5C48BA27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bet.AspNetCore.Shopify", "src\Bet.AspNetCore.Shopify\Bet.AspNetCore.Shopify.csproj", "{5730E781-C34A-4F47-9B09-11AAD90362D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bet.Extensions.Shopify", "src\Bet.Extensions.Shopify\Bet.Extensions.Shopify.csproj", "{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopifyConsole", "src\ShopifyConsole\ShopifyConsole.csproj", "{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88548CBD-90E4-492B-808C-39123A5D5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88548CBD-90E4-492B-808C-39123A5D5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88548CBD-90E4-492B-808C-39123A5D5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88548CBD-90E4-492B-808C-39123A5D5433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7183DA2D-7A9A-40F4-BB6A-F58A6311D663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7183DA2D-7A9A-40F4-BB6A-F58A6311D663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7183DA2D-7A9A-40F4-BB6A-F58A6311D663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7183DA2D-7A9A-40F4-BB6A-F58A6311D663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC0AB363-969A-409E-A66F-879C5C48BA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC0AB363-969A-409E-A66F-879C5C48BA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC0AB363-969A-409E-A66F-879C5C48BA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC0AB363-969A-409E-A66F-879C5C48BA27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5730E781-C34A-4F47-9B09-11AAD90362D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5730E781-C34A-4F47-9B09-11AAD90362D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5730E781-C34A-4F47-9B09-11AAD90362D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5730E781-C34A-4F47-9B09-11AAD90362D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88548CBD-90E4-492B-808C-39123A5D5433} = {79C4F282-CB25-47E8-8342-25B5B80A2E96}
+		{7183DA2D-7A9A-40F4-BB6A-F58A6311D663} = {87E4CCDB-AF23-4DCD-8A27-FED708AEF437}
+		{EC0AB363-969A-409E-A66F-879C5C48BA27} = {87E4CCDB-AF23-4DCD-8A27-FED708AEF437}
+		{5730E781-C34A-4F47-9B09-11AAD90362D2} = {87E4CCDB-AF23-4DCD-8A27-FED708AEF437}
+		{D37FBEBA-2B1F-4274-AC76-70700FBEF1F5} = {87E4CCDB-AF23-4DCD-8A27-FED708AEF437}
+		{3A224CF1-E72A-4065-B4E3-3C8AF57C5CA8} = {87E4CCDB-AF23-4DCD-8A27-FED708AEF437}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82404675-723E-4C1F-BA4F-41CD3DC6B6FC}
+	EndGlobalSection
+EndGlobal
