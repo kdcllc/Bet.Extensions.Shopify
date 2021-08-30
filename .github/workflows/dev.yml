@@ -11,7 +11,7 @@ on:
 env:
   configuration: Release
   solution: Bet.Extensions.Shopify.sln
-  feed: https://f.feedz.io/kdcllc/kdcllc/nuget/index.json
+  feed: https://f.feedz.io/kdcllc/bet-extensions-shopify/nuget/index.json
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -77,25 +77,25 @@ jobs:
       - name: Package
         run: dotnet pack --no-build --configuration ${{ env.configuration }}  --no-restore -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}  -o packages
 
-  #     - name: Publish Nuget Packages
-  #       run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.FEEDZ_API_KEY }} --source ${{ env.feed }} --skip-duplicate --no-symbols true
+      - name: Publish Nuget Packages
+        run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.FEEDZ_API_KEY }} --source ${{ env.feed }} --skip-duplicate --no-symbols true
 
-  # # This workflow contains
-  # tag:
-  #   runs-on: ubuntu-latest
-  #   needs: [build]
-  #   steps:
-  #     - name: Display GitVersion outputs
-  #       run: |
-  #         echo "Version: ${{ needs.build.outputs.Version }}"
-  #         echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}"
+  # This workflow contains
+  tag:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Display GitVersion outputs
+        run: |
+          echo "Version: ${{ needs.build.outputs.Version }}"
+          echo "CommitsSinceVersionSource: ${{ needs.build.outputs.CommitsSinceVersionSource }}"
 
-  #     - name: Create Tag and Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       if: needs.build.outputs.CommitsSinceVersionSource > 0 # only create a release if there has been a commit
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this token is provided by actions not need to create
-  #       with:
-  #         tag_name: ${{ needs.build.outputs.Version }}
-  #         release_name: Release ${{ needs.build.outputs.Version }}
+      - name: Create Tag and Release
+        id: create_release
+        uses: actions/create-release@v1
+        if: needs.build.outputs.CommitsSinceVersionSource > 0 # only create a release if there has been a commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this token is provided by actions not need to create
+        with:
+          tag_name: ${{ needs.build.outputs.Version }}
+          release_name: Release ${{ needs.build.outputs.Version }}
