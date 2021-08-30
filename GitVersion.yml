@@ -13,6 +13,6 @@ branches:
   develop:
     regex: ^dev(elop)?(ment)?$
     tag: preview
-    increment: Minor
+    increment: Patch
 ignore:
   sha: []

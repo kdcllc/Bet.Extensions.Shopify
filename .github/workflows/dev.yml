@@ -77,8 +77,8 @@ jobs:
       - name: Package
         run: dotnet pack --no-build --configuration ${{ env.configuration }}  --no-restore -p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}  -o packages
 
-      # - name: Publish Nuget Packages
-      #   run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.FEEDZ_API_KEY }} --source ${{ env.feed }} --skip-duplicate --no-symbols true
+  #     - name: Publish Nuget Packages
+  #       run: dotnet nuget push packages/*.nupkg --api-key ${{ secrets.FEEDZ_API_KEY }} --source ${{ env.feed }} --skip-duplicate --no-symbols true
 
   # # This workflow contains
   # tag:
