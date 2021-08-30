@@ -1,0 +1,18 @@
+next-version: 0.1
+
+branches:
+  master:
+    tag: ''
+    increment: Patch
+
+  feature:
+    regex: ^features?[/-]
+    tag: 'alpha'
+    increment: Inherit
+
+  develop:
+    regex: ^dev(elop)?(ment)?$
+    tag: preview
+    increment: Minor
+ignore:
+  sha: []
