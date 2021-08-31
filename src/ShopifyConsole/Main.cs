@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Bet.Extensions.Shopify.Abstractions.Options;
-using Bet.Extensions.Shopify.Services;
+using Bet.Extensions.Shopify.Clients;
+using Bet.Extensions.Shopify.Models.Products;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -16,19 +17,22 @@ namespace ShopifyConsole
     public class Main : IMain
     {
         private readonly ILogger<Main> _logger;
-        private readonly IShopifyService _shopifyService;
+        private readonly IInventoryClient _inventory;
+        private readonly IShopifyClient _shopifyService;
         private readonly ShopifyOptions _options;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
         public IConfiguration Configuration { get; set; }
 
         public Main(
-            IShopifyService shopifyService,
+            IInventoryClient inventory,
+            IShopifyClient shopifyService,
             IOptions<ShopifyOptions> options,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)
         {
+            _inventory = inventory;
             _shopifyService = shopifyService;
             _options = options.Value;
 
@@ -45,20 +49,18 @@ namespace ShopifyConsole
             var cancellationToken = _applicationLifetime.ApplicationStopping;
             cancellationToken.ThrowIfCancellationRequested();
 
-            var query = new Dictionary<string, string>
+            // var invt = await _inventory.GetLocationsAsync(cancellationToken);
+
+            var kvb = new List<KeyValuePair<string, object>>
             {
-                {"limit", "1" },
-                { "vendor", "Craftsman" }
+               // new KeyValuePair<string, string>("limit", "250"),
+                new KeyValuePair<string, object>("vendor", "Husky"),
             };
 
-            var productsQuery = $"{_options.ShopUrl}/admin/api/{_options.Version}/products.json";
+            var productsQuery = "products.json";
 
-            var result = await _shopifyService.GetTaskAsync<dynamic>(productsQuery, new { queryString = query }, cancellationToken);
-            var obj = JsonDocument.Parse(Convert.ToString(result));
+            var products = await _shopifyService.GetAllAsync<Product>(productsQuery, "products", kvb, cancellationToken);
 
-            var propertyVal = obj.RootElement.GetProperty("products"); //.GetString();
-
-            _logger.LogInformation($"{Convert.ToString(result)}");
             return 0;
         }
     }

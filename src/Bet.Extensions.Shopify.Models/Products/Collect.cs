@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace Bet.Extensions.Shopify.Abstractions.Models
+namespace Bet.Extensions.Shopify.Models.Products
 {
     /// <summary>
     /// <para>

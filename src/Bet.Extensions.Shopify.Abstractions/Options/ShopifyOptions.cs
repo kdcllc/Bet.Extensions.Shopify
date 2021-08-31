@@ -5,9 +5,15 @@ namespace Bet.Extensions.Shopify.Abstractions.Options
     public class ShopifyOptions
     {
         /// <summary>
-        /// Shopify Shop Url.
+        /// Shopify Shop Name.
         /// </summary>
-        public string ShopUrl { get; set; }
+        public string ShopName { get; set; } = string.Empty;
+
+        public Uri ShopUri => new ($"https://{ShopName}.myshopify.com");
+
+        public Uri ShopAdminWithVersionUri => new ($"{ShopUri}admin/api/{Version}/");
+
+        public Uri ShopAdminUri => new ($"{ShopUri}admin/api/");
 
         public string Version { get; set; } = "2021-07";
 
@@ -15,13 +21,13 @@ namespace Bet.Extensions.Shopify.Abstractions.Options
         /// Shopify Acces Token. SharedSecret.
         /// X-Shopify-Access-Token.
         /// </summary>
-        public string ShopAccessToken { get; set; }
+        public string? ShopAccessToken { get; set; }
 
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(300);
 
         /// <summary>
         /// Retry and Await policy.
         /// </summary>
-        public ResilienceOptions ResilienceOptions { get; set; } = new();
+        public ResilienceOptions ResilienceOptions { get; set; } = new ();
     }
 }
