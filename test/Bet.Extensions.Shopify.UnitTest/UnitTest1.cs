@@ -1,5 +1,8 @@
-using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
+using Bet.Extensions.Shopify.Models.Products;
 using Bet.Extensions.Shopify.Queries;
 
 using Xunit;
@@ -20,6 +23,23 @@ namespace Bet.Extensions.Shopify.UnitTest
             Assert.NotEmpty(url);
 
             Assert.NotNull(kvb);
+        }
+
+        [Fact]
+        public async Task TestJsonContent()
+        {
+            var product = new Product
+            {
+                Handle = "test-handle",
+                Images = new List<ProductImage> { new ProductImage { Src = "https://image.io" } }
+            };
+
+            var content = new JsonContent(new { product = product });
+            var uft8 = await content.ReadAsByteArrayAsync();
+
+            var json = Encoding.UTF8.GetString(uft8);
+
+            Assert.NotNull(json);
         }
     }
 }

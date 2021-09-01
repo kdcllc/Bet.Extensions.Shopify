@@ -6,6 +6,7 @@ namespace Bet.Extensions.Shopify.Models.Products
 {
     /// <summary>
     /// An entity representing a Shopify product.
+    /// <see href="https://shopify.dev/api/admin/rest/reference/products/product#properties-2021-07"/>.
     /// </summary>
     public class Product : BaseModel
     {
@@ -84,6 +85,7 @@ namespace Bet.Extensions.Shopify.Models.Products
 
         /// <summary>
         /// The status of the product.
+        /// active, archived, draft.
         /// </summary>
         [JsonPropertyName("status")]
         public string? Status { get; set; }
@@ -123,5 +125,11 @@ namespace Bet.Extensions.Shopify.Models.Products
         /// </summary>
         [JsonPropertyName("metafields")]
         public IEnumerable<MetaField>? Metafields { get; set; }
+
+        /// <summary>
+        /// Get the item to be published.
+        /// </summary>
+        [JsonPropertyName("published")]
+        public bool? Published { get; set; }
     }
 }

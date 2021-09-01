@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 using Bet.Extensions.Shopify.Abstractions.Options;
 using Bet.Extensions.Shopify.Clients;
+using Bet.Extensions.Shopify.Models;
 using Bet.Extensions.Shopify.Models.Products;
+using Bet.Extensions.Shopify.Queries;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -17,7 +19,8 @@ namespace ShopifyConsole
     public class Main : IMain
     {
         private readonly ILogger<Main> _logger;
-        private readonly IInventoryClient _inventory;
+        private readonly IInventoryClient _inventoryClient;
+        private readonly IProductClient _productClient;
         private readonly IShopifyClient _shopifyService;
         private readonly ShopifyOptions _options;
         private readonly IHostApplicationLifetime _applicationLifetime;
@@ -25,14 +28,16 @@ namespace ShopifyConsole
         public IConfiguration Configuration { get; set; }
 
         public Main(
-            IInventoryClient inventory,
+            IInventoryClient inventoryClient,
+            IProductClient productClient,
             IShopifyClient shopifyService,
             IOptions<ShopifyOptions> options,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)
         {
-            _inventory = inventory;
+            _inventoryClient = inventoryClient;
+            _productClient = productClient;
             _shopifyService = shopifyService;
             _options = options.Value;
 
@@ -51,15 +56,61 @@ namespace ShopifyConsole
 
             // var invt = await _inventory.GetLocationsAsync(cancellationToken);
 
-            var kvb = new List<KeyValuePair<string, object>>
+            var newProd = new Product
             {
-               // new KeyValuePair<string, string>("limit", "250"),
-                new KeyValuePair<string, object>("vendor", "Husky"),
+                Title = "sample title",
+                BodyHtml = "<p>Test Product</p>",
+                SeoTitle = "SEO TEST TITLE",
+                SeoDescription = "SEO Description",
+                Status = "draft",
+                Images = new List<ProductImage> { new ProductImage { Src = "https://easykeys.com/Images/Manufacturers/are_logo.gif" } },
+                Metafields = new List<MetaField>
+                    {
+                        new MetaField { Namespace = "global",
+                                        Key = "harmonized_system_code",
+                                        ValueType = "string",
+                                        Value = "830170" }
+                    }
             };
 
-            var productsQuery = "products.json";
+            var pc = await _productClient.CreateAsync(newProd, cancellationToken);
 
-            var products = await _shopifyService.GetAllAsync<Product>(productsQuery, "products", kvb, cancellationToken);
+            // var p = await _productClient.GetAsync(7057619386530, new FieldsQuery(), cancellationToken);
+
+            pc.Options = new List<ProductOption> { new ProductOption { Name = "Lock Code", Values = new[] { "1", "2" } } };
+            pc.Metafields = new List<MetaField>
+                {
+                    new MetaField
+                    {
+                        Namespace = "global",
+                        Key = "keyblank",
+                        Value = "001",
+                        ValueType = "string"
+                    },
+
+                    new MetaField
+                    {
+                        Namespace = "global",
+                        Key = "keycodes",
+                        Value = "001-100",
+                        ValueType = "string"
+                    },
+                };
+
+            var up = await _productClient.UpdateAsync(pc, cancellationToken);
+
+            await _productClient.DeleteAsync(up.Id.GetValueOrDefault(), cancellationToken);
+
+            var productQuery = new ProductQuery
+            {
+                Limit = 150,
+                Vendor = "Husky"
+            };
+
+            var ps = await _productClient.GetAsync(7052747014306, new FieldsQuery(), cancellationToken);
+
+            var productsCount = await _productClient.CountAsync(productQuery, cancellationToken);
+            var products = await _productClient.ListAllAsync(productQuery, cancellationToken);
 
             return 0;
         }

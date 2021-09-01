@@ -2,35 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using Bet.Extensions.Shopify.Abstractions.Options;
 using Bet.Extensions.Shopify.Models.Inventory;
-
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Bet.Extensions.Shopify.Clients.Impl
 {
     public class InventoryClient : IInventoryClient
     {
         private readonly IShopifyClient _shopifyClient;
-        private readonly ShopifyOptions _options;
-        private readonly ILogger<InventoryClient> _logger;
 
-        public InventoryClient(
-            IShopifyClient shopifyClient,
-            IOptions<ShopifyOptions> options,
-            ILogger<InventoryClient> logger)
+        public InventoryClient(IShopifyClient shopifyClient)
         {
-            _shopifyClient = shopifyClient;
-            _options = options.Value;
-            _logger = logger;
+            _shopifyClient = shopifyClient ?? throw new System.ArgumentNullException(nameof(shopifyClient));
         }
 
         public async Task<IEnumerable<Location>?> GetLocationsAsync(CancellationToken cancellationToken = default)
         {
             var requestUri = "locations.json";
 
-            var response = await _shopifyClient.GetAsync<IEnumerable<Location>>(requestUri, "locations", cancellationToken: cancellationToken);
+            var response = await _shopifyClient.ListAsync<IEnumerable<Location>>(requestUri, "locations", cancellationToken: cancellationToken);
 
             return response.Payload;
         }
