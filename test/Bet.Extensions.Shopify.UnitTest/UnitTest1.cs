@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
+using Bet.Extensions.Shopify;
+using Bet.AspNetCore.Shopify.OAuth;
 using Bet.Extensions.Shopify.Models.Products;
 using Bet.Extensions.Shopify.Queries;
 
@@ -40,6 +40,14 @@ namespace Bet.Extensions.Shopify.UnitTest
             var json = Encoding.UTF8.GetString(uft8);
 
             Assert.NotNull(json);
+        }
+
+        [Fact]
+        public void TestEnum()
+        {
+            var st = new List<AuthorizationScope> { AuthorizationScope.ReadAllOrders, AuthorizationScope.ReadCustomers };
+
+            var ut = st.Select(x => x.ToSerializedString());
         }
     }
 }

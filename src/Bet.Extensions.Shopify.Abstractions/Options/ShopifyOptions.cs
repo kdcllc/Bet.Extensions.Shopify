@@ -23,6 +23,14 @@ namespace Bet.Extensions.Shopify.Abstractions.Options
         /// </summary>
         public string? ShopAccessToken { get; set; }
 
+        /// <summary>
+        /// Shopify Api Key.
+        /// </summary>
+        public string? ApiKey { get; set; }
+
+        /// <summary>
+        /// Timeout for the HttpRequests.
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(300);
 
         /// <summary>
