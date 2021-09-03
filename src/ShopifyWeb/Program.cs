@@ -1,7 +1,14 @@
+﻿using System.Text;
+
+using Bet.AspNetCore.Shopify.Middleware.Hmac;
 using Bet.Extensions.Shopify.Abstractions.Options;
+using Bet.Extensions.Shopify.Models.Products;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +17,9 @@ builder.Services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), c
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new () { Title = "ShopifyWeb", Version = "v1" }));
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new() { Title = "ShopifyWeb", Version = "v1" }));
+
+builder.Services.AddEndpointsApiExplorer();
 
 var authBuilder = builder.Services.AddAuthentication(options => options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -22,7 +31,7 @@ authBuilder.AddCookie(options =>
                 // requires to support iframe in Shopify store.
                 options.Cookie.SameSite = SameSiteMode.None;
             })
-            .AddShopify(configure: o =>
+           .AddShopify(configure: o =>
             {
                 var opt = new ShopifyOptions();
                 builder.Configuration.Bind(nameof(ShopifyOptions), opt);
@@ -37,6 +46,12 @@ authBuilder.AddCookie(options =>
                 o.Scope.Add("read_products");
                 o.Scope.Add("read_product_listings");
             });
+
+builder.Services.AddShopifyHmacValidator((options, sp) =>
+{
+    options.WebHookPaths.Add("/OrderWebhook");
+    options.WebHookPaths.Add("/api​/Webhook​/Order");
+});
 
 var app = builder.Build();
 
@@ -54,6 +69,18 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseShopifyHmacValidation();
+
 app.MapControllers();
+
+app.UseHttpLogging();
+
+app.MapPost(
+    "/OrderWebhook",
+    async (HttpRequest request) =>
+    {
+        using var reader = new StreamReader(request.Body, Encoding.UTF8);
+        return await reader.ReadToEndAsync();
+    });
 
 app.Run();

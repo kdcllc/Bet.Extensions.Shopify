@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bet.AspNetCore.Shopify.Middleware.Hmac;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace ShopifyWeb.Controllers
 {

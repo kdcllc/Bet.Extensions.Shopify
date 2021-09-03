@@ -1,7 +1,6 @@
 ﻿using Bet.AspNetCore.Shopify.OAuth;
 using Bet.Extensions.Shopify.Abstractions.Options;
 
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

@@ -1,4 +1,6 @@
-﻿namespace Bet.AspNetCore.Shopify.Options
+﻿using System.Collections.Generic;
+
+namespace Bet.AspNetCore.Shopify.Middleware.Hmac.Options
 {
     /// <summary>
     /// Hmac validation middleware options configurations.
@@ -11,9 +13,9 @@
         public string ShopifyHmacHeaderName { get; set; } = "X-Shopify-Hmac-Sha256";
 
         /// <summary>
-        /// The value assigned by the webhook.
+        /// The value assigned by the webhook upon creation of the webhook.
         /// </summary>
-        public string ShopifySharedToken { get; set; } = string.Empty;
+        public string SharedSecret { get; set; } = string.Empty;
 
         /// <summary>
         /// Enable or disable verification.
@@ -23,6 +25,6 @@
         /// <summary>
         /// Webhook path to validate.
         /// </summary>
-        public string WebHookPath { get; set; } = string.Empty;
+        public IList<string> WebHookPaths { get; set; } = new List<string>();
     }
 }

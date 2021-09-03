@@ -4,7 +4,7 @@
     <VersionPrefix>0.1.0-preview1</VersionPrefix>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>preview</LangVersion>
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);CS1591;NU1605;</NoWarn>
   </PropertyGroup>
@@ -34,5 +34,5 @@
     <DebugType>Embedded</DebugType>
     <EmbedAllSources>True</EmbedAllSources>
   </PropertyGroup>
-  
+
 </Project>

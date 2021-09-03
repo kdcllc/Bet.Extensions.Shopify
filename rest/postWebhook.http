@@ -1,0 +1,10 @@
+
+#POST https://localhost:5001/api/Webhook/Order
+
+POST https://localhost:5001/OrderWebhook
+Content-Type: "application/json"
+X-Shopify-Topic: order/create
+
+{
+    "id": 1234
+}

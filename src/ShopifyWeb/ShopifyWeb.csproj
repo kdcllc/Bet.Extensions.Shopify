@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bet.AspNetCore.Shopify\Bet.AspNetCore.Shopify.csproj" />
-    <ProjectReference Include="..\Bet.Extensions.Shopify.Abstractions\Bet.Extensions.Shopify.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

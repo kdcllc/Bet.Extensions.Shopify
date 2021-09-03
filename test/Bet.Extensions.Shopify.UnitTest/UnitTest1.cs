@@ -47,7 +47,7 @@ namespace Bet.Extensions.Shopify.UnitTest
         {
             var st = new List<AuthorizationScope> { AuthorizationScope.ReadAllOrders, AuthorizationScope.ReadCustomers };
 
-            var ut = st.Select(x => x.ToSerializedString());
+            // var ut = st.Select(x => x.ToSerializedString());
         }
     }
 }
