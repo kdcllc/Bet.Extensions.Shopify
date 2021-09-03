@@ -42,3 +42,7 @@ If you like or are using this project to learn or start your solution, please gi
 
 ## Github actions
 `NUGET_API_KEY` and `FEEDZ_API_KEY`
+
+## Resources
+
+- [Using the ProblemDetails Class in ASP.NET Core Web API](https://code-maze.com/using-the-problemdetails-class-in-asp-net-core-web-api/)

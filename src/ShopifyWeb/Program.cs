@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
+using ShopifyWeb.Events.Products;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), configureAction: (o) => { });
@@ -53,6 +55,9 @@ builder.Services.AddShopifyHmacValidator((options, sp) =>
     options.WebHookPaths.Add("/api​/Webhook​/Order");
 });
 
+builder.Services.AddShopifyWebHooks()
+        .AddWebhook<ProductCreateEventHandler, Product>("products/create");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -70,6 +75,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseShopifyHmacValidation();
+
+app.UseShopifyWebhooks();
 
 app.MapControllers();
 

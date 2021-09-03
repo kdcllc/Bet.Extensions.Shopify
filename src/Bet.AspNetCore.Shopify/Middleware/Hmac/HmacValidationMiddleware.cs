@@ -1,20 +1,15 @@
-﻿using System.IO;
-using System.Net;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Bet.AspNetCore.Shopify.Middleware.Hmac.Options;
 using Bet.AspNetCore.Shopify.Services;
 using Bet.Extensions.Shopify.Abstractions;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Bet.AspNetCore.Shopify.Middleware.Hmac
 {
-    public class HmacValidationMiddleware
+    internal class HmacValidationMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly IHmacValidator _validator;
@@ -30,7 +25,7 @@ namespace Bet.AspNetCore.Shopify.Middleware.Hmac
             _options = options.Value;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             var url = context.Request.Path.Value;
             foreach (var item in _options.WebHookPaths)
