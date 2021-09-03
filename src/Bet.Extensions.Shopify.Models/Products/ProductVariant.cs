@@ -4,6 +4,34 @@ using System.Text.Json.Serialization;
 
 namespace Bet.Extensions.Shopify.Models.Products
 {
+    /// <summary>
+    /// <para>The Shopify API lets you do the following with the Product Variant resource. More detailed versions of these general actions may be available:</para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}/variants.json
+    /// Retrieves a list of product variants.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}/variants/count.json
+    /// Receive a count of all Product Variants.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/variants/{variant_id}.json
+    /// Receive a single Product Variant.
+    /// </para>
+    /// <para>
+    /// POST /admin/api/2021-07/products/{product_id}/variants.json
+    /// Create a new Product Variant.
+    /// </para>
+    /// <para>
+    /// PUT /admin/api/2021-07/variants/{variant_id}.json
+    /// Modify an existing Product Variant.
+    /// </para>
+    /// <para>
+    /// DELETE /admin/api/2021-07/products/{product_id}/variants/{variant_id}.json
+    /// Remove an existing Product Variant.
+    /// </para>
+    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product-variant#properties-2021-07"/>.</para>
+    /// </summary>
     public class ProductVariant : BaseModel
     {
         /// <summary>
@@ -152,8 +180,11 @@ namespace Bet.Extensions.Shopify.Models.Products
         public string? WeightUnit { get; set; }
 
         /// <summary>
-        /// Additional metadata about the <see cref="ProductVariant"/>. Note: This is not naturally returned with a <see cref="ProductVariant"/> response, as
+        /// <para>Additional metadata about the <see cref="ProductVariant"/>.</para>
+        /// <para>
+        /// Note: This is not naturally returned with a <see cref="ProductVariant"/> response, as
         /// Shopify will not return <see cref="ProductVariant"/> metafields unless specified.
+        /// </para>
         /// </summary>
         [JsonPropertyName("metafields")]
         public IEnumerable<MetaField>? Metafields { get; set; }

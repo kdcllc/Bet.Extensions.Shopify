@@ -6,28 +6,22 @@ using Bet.Extensions.Shopify.Models.Products;
 namespace Bet.Extensions.Shopify.Models.Queries.Products
 {
     /// <summary>
-    /// <para>Query Shopify <see cref="Product"/> endpoint.</para>
-    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product#endpoints-2021-07"/>.</para>
+    /// <para>Query Shopify for <see cref="CustomCollection"/> endpoint.</para>
+    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/customcollection#endpoints-2021-07"/>.</para>
     /// </summary>
-    public class ProductCountQuery : PageInfoQuery
+    public class CustomCollectionCountQuery
     {
         /// <summary>
-        /// Return products by product vendor.
+        /// Count custom collections with given title.
         /// </summary>
-        [JsonPropertyName("vendor")]
-        public string? Vendor { get; set; }
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
 
         /// <summary>
-        /// Return products by product type.
+        /// Count custom collections with given title.
         /// </summary>
-        [JsonPropertyName("product_type")]
-        public string? ProductType { get; set; }
-
-        /// <summary>
-        /// Return products by product collection ID.
-        /// </summary>
-        [JsonPropertyName("collection_id")]
-        public long? CollectionId { get; set; }
+        [JsonPropertyName("product_id")]
+        public long? ProductId { get; set; }
 
         /// <summary>
         /// Return products created after a specified date. (format: 2014-04-25T16:15:47-04:00).
@@ -54,26 +48,14 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
         public DateTimeOffset? UpdatedAtMax { get; set; }
 
         /// <summary>
-        /// Return products published after a specified date. (format: 2014-04-25T16:15:47-04:00).
-        /// </summary>
-        [JsonPropertyName("published_at_min")]
-        public DateTimeOffset? PublishedAtMin { get; set; }
-
-        /// <summary>
-        /// Return products published before a specified date. (format: 2014-04-25T16:15:47-04:00).
-        /// </summary>
-        [JsonPropertyName("published_at_max")]
-        public DateTimeOffset? PublishedAtMax { get; set; }
-
-        /// <summary>
         /// <para>
-        ///     Return products by their published status.
+        ///     Return Custom Collection by their published status.
         /// </para>
         /// <para>
         /// (default: any)
-        /// published: Return only published products.
-        /// unpublished: Return only unpublished products.
-        /// any: Return all products.
+        /// published: Return only published Custom Collections.
+        /// unpublished: Return only unpublished Custom Collections.
+        /// any: Return all Custom Collections.
         /// </para>
         /// </summary>
         [JsonPropertyName("published_status")]

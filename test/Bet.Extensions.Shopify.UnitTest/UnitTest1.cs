@@ -3,6 +3,7 @@ using System.Text;
 using Bet.AspNetCore.Shopify.OAuth;
 using Bet.Extensions.Shopify.Models.Products;
 using Bet.Extensions.Shopify.Models.Queries;
+using Bet.Extensions.Shopify.Models.Queries.Products;
 
 using Xunit;
 

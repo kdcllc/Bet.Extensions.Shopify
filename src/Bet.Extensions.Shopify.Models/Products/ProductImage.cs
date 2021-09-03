@@ -5,8 +5,32 @@ using System.Text.Json.Serialization;
 namespace Bet.Extensions.Shopify.Models.Products
 {
     /// <summary>
-    /// An object representing a product image.
-    /// <see href="https://shopify.dev/api/admin/rest/reference/products/product-image#properties-2021-07"/>.
+    /// <para>The Shopify API lets you do the following with the Product Image resource. More detailed versions of these general actions may be available:</para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}/images.json
+    /// Receive a list of all Product Images.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}/images/count.json
+    /// Receive a count of all Product Images.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}/images/{image_id}.json
+    /// Receive a single Product Image.
+    /// </para>
+    /// <para>
+    /// POST /admin/api/2021-07/products/{product_id}/images.json
+    /// Create a new Product Image.
+    /// </para>
+    /// <para>
+    /// PUT /admin/api/2021-07/products/{product_id}/images/{image_id}.json
+    /// Modify an existing Product Image.
+    /// </para>
+    /// <para>
+    /// DELETE /admin/api/2021-07/products/{product_id}/images/{image_id}.json
+    /// Remove an existing Product Image.
+    /// </para>
+    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product-image#properties-2021-07"/>.</para>
     /// </summary>
     public class ProductImage : BaseModel
     {
@@ -39,7 +63,7 @@ namespace Bet.Extensions.Shopify.Models.Products
         /// <summary>
         /// <para>Specifies the location of the product image.</para>
         /// <para>This parameter supports URL filters that you can use to retrieve modified copies of the image.</para>
-        /// <para>For example, add _small, to the filename to retrieve a scaled copy of the image at 100 x 100 px (for example, ipod-nano_small.png),</para>
+        /// <para>For example, add _small, to the filename to retrieve a scaled copy of the image at 100 x 100 px (for example, ipod-nano_small.png),.</para>
         /// <para>or add _2048x2048 to retrieve a copy of the image constrained at 2048 x 2048 px resolution (for example, ipod-nano_2048x2048.png).</para>
         /// </summary>
         [JsonPropertyName("src")]

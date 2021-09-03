@@ -8,8 +8,4 @@
   <ItemGroup>
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Queries\Products\" />
-  </ItemGroup>
 </Project>

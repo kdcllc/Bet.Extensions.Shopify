@@ -5,8 +5,32 @@ using System.Text.Json.Serialization;
 namespace Bet.Extensions.Shopify.Models.Products
 {
     /// <summary>
-    /// An entity representing a Shopify product.
-    /// <see href="https://shopify.dev/api/admin/rest/reference/products/product#properties-2021-07"/>.
+    /// <para>The Shopify API lets you do the following with the Product resource. More detailed versions of these general actions may be available:</para>
+    /// <para>
+    /// GET /admin/api/2021-07/products.json
+    /// Retrieve a list of products.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/count.json
+    /// Retrieve a count of products.
+    /// </para>
+    /// <para>
+    /// GET /admin/api/2021-07/products/{product_id}.json
+    /// Retrieve a single product.
+    /// </para>
+    /// <para>
+    /// POST /admin/api/2021-07/products.json
+    /// Create a new product.
+    /// </para>
+    /// <para>
+    /// PUT /admin/api/2021-07/products/{product_id}.json
+    /// Updates a product.
+    /// </para>
+    /// <para>
+    /// DELETE /admin/api/2021-07/products/{product_id}.json
+    /// Delete a product.
+    /// </para>
+    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product#properties-2021-07"/>.</para>
     /// </summary>
     public class Product : BaseModel
     {

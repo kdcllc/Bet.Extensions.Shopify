@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Bet.Extensions.Shopify.Models.Queries
 {
@@ -8,6 +9,6 @@ namespace Bet.Extensions.Shopify.Models.Queries
         /// Return only certain fields specified by a comma-separated list of field names.
         /// </summary>
         [JsonPropertyName("fields")]
-        public string? Fields { get; set; }
+        public IEnumerable<string>? Fields { get; set; }
     }
 }

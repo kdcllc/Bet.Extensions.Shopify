@@ -6,8 +6,8 @@ using Bet.Extensions.Shopify.Models.Products;
 namespace Bet.Extensions.Shopify.Models.Queries.Products
 {
     /// <summary>
-    /// Query Shopify <see cref="Product"/> endpoint for products.
-    /// <see href="https://shopify.dev/api/admin/rest/reference/products/product#endpoints-2021-07"/>.
+    /// <para>Query Shopify <see cref="Product"/> endpoint.</para>
+    /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product#endpoints-2021-07"/>.</para>
     /// </summary>
     public class ProductQuery : ProductCountQuery
     {
@@ -18,7 +18,7 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
         public IEnumerable<long>? Ids { get; set; }
 
         /// <summary>
-        /// Return only products after the specified ID.
+        /// Restrict results to after the specified ID.
         /// </summary>
         [JsonPropertyName("since_id")]
         public long? SinceId { get; set; }
