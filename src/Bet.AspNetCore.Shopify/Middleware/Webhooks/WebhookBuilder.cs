@@ -20,16 +20,16 @@ namespace Bet.AspNetCore.Shopify.Middleware.Webhooks
         /// </summary>
         /// <typeparam name="THandler">The type of webhook handler.</typeparam>
         /// <typeparam name="TEvent">The type of the webhook event.</typeparam>
-        /// <param name="topicName">The name of the topic i.e 'checkouts/delete'.</param>
+        /// <param name="topicNames">The name of the topic i.e 'checkouts/delete'.</param>
         /// <returns></returns>
-        public IWebhookBuilder AddWebhook<THandler, TEvent>(string topicName)
+        public IWebhookBuilder AddWebhook<THandler, TEvent>(params string[] topicNames)
            where TEvent : class
            where THandler : class, IWebhookHandler<TEvent>
         {
             Services.Configure<WebhooksOptions>(options =>
             {
                 options.WebHooksRegistrations.Add(new WebhookRegistration(
-                    topicName,
+                    topicNames,
                     sp => ActivatorUtilities.GetServiceOrCreateInstance<THandler>(sp),
                     typeof(THandler),
                     typeof(TEvent)));

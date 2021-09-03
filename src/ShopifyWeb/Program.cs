@@ -1,14 +1,10 @@
 ﻿using System.Text;
 
-using Bet.AspNetCore.Shopify.Middleware.Hmac;
 using Bet.Extensions.Shopify.Abstractions.Options;
 using Bet.Extensions.Shopify.Models.Products;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
 
 using ShopifyWeb.Events.Products;
 
@@ -56,7 +52,7 @@ builder.Services.AddShopifyHmacValidator((options, sp) =>
 });
 
 builder.Services.AddShopifyWebHooks()
-        .AddWebhook<ProductCreateEventHandler, Product>("products/create");
+        .AddWebhook<ProductCreateEventHandler, Product>("products/create", "products/update");
 
 var app = builder.Build();
 

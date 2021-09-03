@@ -9,6 +9,7 @@ using Bet.Extensions.Shopify.Abstractions.Options;
 using Microsoft.Extensions.Logging;
 
 using Polly;
+using Polly.Extensions.Http;
 
 namespace Bet.Extensions.Shopify
 {

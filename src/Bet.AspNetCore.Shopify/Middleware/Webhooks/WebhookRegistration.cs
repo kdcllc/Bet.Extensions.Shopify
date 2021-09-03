@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bet.AspNetCore.Shopify.Middleware.Webhooks
 {
@@ -7,18 +9,18 @@ namespace Bet.AspNetCore.Shopify.Middleware.Webhooks
         private Func<IServiceProvider, object>? _handlerFactory;
 
         public WebhookRegistration(
-            string topicName,
+            string[] topicNames,
             Func<IServiceProvider, object> factory,
             Type handlerType,
             Type eventType)
         {
-            TopicName = topicName;
+            TopicNames = topicNames.ToList();
             HandlerFactory = factory ?? throw new ArgumentNullException(nameof(factory));
             HandlerType = handlerType ?? throw new ArgumentNullException(nameof(handlerType));
             EventType = eventType ?? throw new ArgumentNullException(nameof(eventType));
         }
 
-        public string TopicName { get; }
+        public IList<string> TopicNames { get; }
 
         public Type HandlerType { get; }
 

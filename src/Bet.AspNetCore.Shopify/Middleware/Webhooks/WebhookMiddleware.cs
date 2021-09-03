@@ -61,7 +61,7 @@ namespace Bet.AspNetCore.Shopify.Middleware.Webhooks
             {
                 if (context.Request.Headers.TryGetValue(ShopifyHeaders.WebhookTopic, out var topicName))
                 {
-                    var webhook = _options.WebHooksRegistrations.FirstOrDefault(x => string.Equals(x.TopicName, topicName, StringComparison.InvariantCultureIgnoreCase));
+                    var webhook = _options.WebHooksRegistrations.FirstOrDefault(x => x.TopicNames.Contains(topicName));
 
                     // found our match.
                     if (webhook != null)
