@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bet.Extensions.Shopify.Queries
+namespace Bet.Extensions.Shopify.Models.Queries
 {
     /// <summary>
     /// Default query parameters.
     /// </summary>
-    public class BaseQuery
+    public class PageInfoQuery
     {
         /// <summary>
         /// <para>A unique ID used to access a page of results.</para>

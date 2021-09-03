@@ -7,7 +7,7 @@ using Bet.Extensions.Shopify.Models;
 
 namespace Bet.Extensions.Shopify.Clients
 {
-    public interface IShopifyClient
+    public interface IShopifyBaseClient
     {
         /// <summary>
         /// An instance of the <see cref="HttpClient"/> that has been configured to be used.

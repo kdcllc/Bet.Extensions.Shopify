@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bet.Extensions.Shopify.Queries
+namespace Bet.Extensions.Shopify.Models.Queries
 {
     public class FieldsQuery
     {

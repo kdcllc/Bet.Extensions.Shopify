@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 
 using Bet.AspNetCore.Shopify.Middleware.Webhooks;
+using Bet.Extensions.Shopify;
 using Bet.Extensions.Shopify.Models.Products;
 
 namespace ShopifyWeb.Events.Products
@@ -18,7 +19,7 @@ namespace ShopifyWeb.Events.Products
         {
             try
             {
-                var json = JsonSerializer.Serialize(@event);
+                var json = JsonSerializer.Serialize(@event, SystemTextJson.Options);
                 _logger.LogInformation("Received: {json}", json);
                 return Task.FromResult(new WebHookResult());
             }

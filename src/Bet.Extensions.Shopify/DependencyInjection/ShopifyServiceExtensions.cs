@@ -19,10 +19,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // configure shopify options
             services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), configureAction: (o) => configOptions?.Invoke(o));
 
-            services.AddTransient<IInventoryClient, InventoryClient>();
-            services.AddTransient<IProductClient, ProductClient>();
+            // register generic types for clients.
+            services.AddTransient(typeof(IShopifyTypedClient<,,>), typeof(ShopifyTypedClient<,,>));
 
-            services.AddHttpClient<IShopifyClient, ShopifyClient>()
+            services.AddHttpClient<IShopifyBaseClient, ShopifyClient>()
               .ConfigureHttpClient((sp, client) =>
               {
                   var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;

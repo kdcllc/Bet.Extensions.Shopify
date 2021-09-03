@@ -1,9 +1,8 @@
 using System.Text;
 
-using Bet.Extensions.Shopify;
 using Bet.AspNetCore.Shopify.OAuth;
 using Bet.Extensions.Shopify.Models.Products;
-using Bet.Extensions.Shopify.Queries;
+using Bet.Extensions.Shopify.Models.Queries;
 
 using Xunit;
 

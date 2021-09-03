@@ -3,13 +3,13 @@ using System.Text.Json.Serialization;
 
 using Bet.Extensions.Shopify.Models.Products;
 
-namespace Bet.Extensions.Shopify.Queries
+namespace Bet.Extensions.Shopify.Models.Queries.Products
 {
     /// <summary>
     /// Query Shopify <see cref="Product"/> endpoint for product count.
     /// <see href="https://shopify.dev/api/admin/rest/reference/products/product#endpoints-2021-07"/>.
     /// </summary>
-    public class ProductCountQuery : BaseQuery
+    public class ProductCountQuery : PageInfoQuery
     {
         /// <summary>
         /// Return products by product vendor.

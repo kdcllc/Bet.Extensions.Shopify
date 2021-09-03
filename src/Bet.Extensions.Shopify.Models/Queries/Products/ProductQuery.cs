@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 using Bet.Extensions.Shopify.Models.Products;
 
-namespace Bet.Extensions.Shopify.Queries
+namespace Bet.Extensions.Shopify.Models.Queries.Products
 {
     /// <summary>
     /// Query Shopify <see cref="Product"/> endpoint for products.

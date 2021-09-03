@@ -90,9 +90,17 @@ namespace Bet.Extensions.Shopify.Models.Products
         [JsonPropertyName("status")]
         public string? Status { get; set; }
 
+        /// <summary>
+        /// SEO Title is for update only field.
+        /// The Admin Api doesn't return this value.
+        /// </summary>
         [JsonPropertyName("metafields_global_title_tag")]
         public string? SeoTitle { get; set; }
 
+        /// <summary>
+        /// SEO Description is for update only field.
+        /// The Admin Api Deosn't return this fields.
+        /// </summary>
         [JsonPropertyName("metafields_global_description_tag")]
         public string? SeoDescription { get; set; }
 
