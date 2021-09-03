@@ -9,8 +9,9 @@ namespace Bet.AspNetCore.Shopify.Middleware.Webhooks
         /// A Handler for the Shopify event.
         /// </summary>
         /// <param name="event">The actual event.</param>
+        /// <param name="topicName">The shopify topic name for processing.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        Task<WebHookResult> HandleEventAsync(TEvent @event, CancellationToken cancellationToken = default);
+        Task<WebHookResult> HandleEventAsync(TEvent @event, string topicName, CancellationToken cancellationToken = default);
     }
 }

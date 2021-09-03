@@ -15,7 +15,7 @@ builder.Services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), c
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new() { Title = "ShopifyWeb", Version = "v1" }));
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new () { Title = "ShopifyWeb", Version = "v1" }));
 
 builder.Services.AddEndpointsApiExplorer();
 

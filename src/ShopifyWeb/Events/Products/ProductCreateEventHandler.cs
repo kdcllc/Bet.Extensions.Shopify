@@ -15,12 +15,12 @@ namespace ShopifyWeb.Events.Products
             _logger = logger;
         }
 
-        public Task<WebHookResult> HandleEventAsync(Product @event, CancellationToken cancellationToken = default)
+        public Task<WebHookResult> HandleEventAsync(Product @event, string topicName, CancellationToken cancellationToken = default)
         {
             try
             {
                 var json = JsonSerializer.Serialize(@event, SystemTextJson.Options);
-                _logger.LogInformation("Received: {json}", json);
+                _logger.LogInformation("Received topic {topicName}: {json}", topicName, json);
                 return Task.FromResult(new WebHookResult());
             }
             catch (Exception ex)
