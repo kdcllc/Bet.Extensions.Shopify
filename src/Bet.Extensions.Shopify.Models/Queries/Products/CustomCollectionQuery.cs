@@ -12,13 +12,6 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
     public class CustomCollectionQuery : CustomCollectionCountQuery
     {
         /// <summary>
-        /// <para>The number of items which should be returned.</para>
-        /// <para>Default is 50, maximum is 250.</para>
-        /// </summary>
-        [JsonPropertyName("limit")]
-        public int? Limit { get; set; }
-
-        /// <summary>
         /// Retrieve only those specified by a comma-separated list of order IDs.
         /// </summary>
         [JsonPropertyName("ids")]
