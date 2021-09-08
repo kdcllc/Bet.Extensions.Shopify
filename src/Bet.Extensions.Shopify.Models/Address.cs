@@ -5,10 +5,10 @@ using Bet.Extensions.Shopify.Models.Customers;
 namespace Bet.Extensions.Shopify.Models
 {
     /// <summary>
-    ///
+    /// Address
     ///
     /// <see href="https://shopify.dev/api/admin/rest/reference/customers/customer-address#properties-2021-07"/>.
-    /// <see href=""/>.
+    /// <see href="https://shopify.dev/api/admin/rest/reference/orders/order#properties-2021-07"/>.
     /// </summary>
     public class Address
     {

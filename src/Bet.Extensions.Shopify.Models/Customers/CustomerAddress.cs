@@ -32,10 +32,11 @@ namespace Bet.Extensions.Shopify.Models.Customers
     /// PUT /admin/api/2021-07/customers/{customer_id}/addresses/{address_id}/default.json
     /// Sets the default address for a customer.
     /// </para>
+    ///
     /// <para>
-    /// <see href="https://shopify.dev/api/admin/rest/reference/customers/customer-address"/>
-    /// ///.
-    /// </para></summary>
+    ///    <see href="https://shopify.dev/api/admin/rest/reference/customers/customer-address"/>.
+    /// </para>
+    /// </summary>
     public class CustomerAddress : Address
     {
         /// <summary>

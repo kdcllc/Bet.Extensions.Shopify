@@ -12,15 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Bet.Extensions.Shopify.Clients.Impl
 {
-    public class ShopifyClient : IShopifyBaseClient
+    internal class ShopifyBaseClient : IShopifyBaseClient
     {
         private readonly HttpClient _httpClient;
 
-        private readonly ILogger<ShopifyClient> _logger;
+        private readonly ILogger<ShopifyBaseClient> _logger;
 
-        public ShopifyClient(
+        public ShopifyBaseClient(
             HttpClient httpClient,
-            ILogger<ShopifyClient> logger)
+            ILogger<ShopifyBaseClient> logger)
         {
             _httpClient = httpClient ?? throw new System.ArgumentNullException(nameof(httpClient));
             _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
