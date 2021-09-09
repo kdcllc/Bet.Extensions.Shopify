@@ -226,7 +226,6 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </code>
         /// </para>
         /// </summary>
-        /// </summary>
         /// <remarks>
         /// Used POST /admin/api/2021-07/orders/{order_id}/refunds.json.
         /// </remarks>

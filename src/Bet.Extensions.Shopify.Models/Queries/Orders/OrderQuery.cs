@@ -89,7 +89,7 @@ namespace Bet.Extensions.Shopify.Models.Queries.Orders
 
         /// <summary>
         /// <para>Orders of a given fulfillment status.</para>
-        /// <para>(default: any)</para>
+        /// <para>(default: any).</para>
         /// <para>shipped: Orders that have been shipped. Returns orders with fulfillment_status of fulfilled.</para>
         /// <para>partial: Partially shipped orders.</para>
         /// <para>unshipped: Orders that have not yet been shipped. Returns orders with fulfillment_status of null.</para>

@@ -32,7 +32,7 @@ namespace Bet.Extensions.Shopify.Models
         /// The customer's credit card number, with most of the leading digits redacted.
         /// </summary>
         [JsonPropertyName("credit_card_number")]
-        public string CreditCardNumber { get; set; }
+        public string? CreditCardNumber { get; set; }
 
         /// <summary>
         /// The name of the company who issued the customer's credit card.

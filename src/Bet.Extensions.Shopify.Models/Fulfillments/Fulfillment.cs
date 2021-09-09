@@ -248,7 +248,7 @@ namespace Bet.Extensions.Shopify.Models.Fulfillments
         /// </para>
         /// </summary>
         [JsonPropertyName("line_items")]
-        public IEnumerable<LineItem>? LineItems { get; set; }
+        public IEnumerable<ShippingLineItem>? LineItems { get; set; }
 
         /// <summary>
         /// <para>Whether the customer should be notified.</para>

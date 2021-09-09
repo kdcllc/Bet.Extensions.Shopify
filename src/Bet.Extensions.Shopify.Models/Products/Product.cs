@@ -152,7 +152,7 @@ namespace Bet.Extensions.Shopify.Models.Products
 
         /// <summary>
         /// Additional metadata about the <see cref="Product"/>. Note: This is not naturally returned with a <see cref="Product"/> response, as
-        /// Shopify will not return <see cref="Product"/> metafields unless specified. Instead, you need to query metafields with <see cref="MetaFieldService"/>.
+        /// Shopify will not return <see cref="Product"/> metafields unless specified.
         /// Uses include: Creating, updating, and deserializing webhook bodies that include them.
         /// </summary>
         [JsonPropertyName("metafields")]

@@ -19,8 +19,6 @@ namespace ShopifyConsole
         private readonly IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> _productClient;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
-        public IConfiguration Configuration { get; set; }
-
         public Main(
             IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> productClient,
             IHostApplicationLifetime applicationLifetime,
@@ -32,6 +30,8 @@ namespace ShopifyConsole
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
+        public IConfiguration Configuration { get; set; }
 
         public async Task<int> RunAsync()
         {

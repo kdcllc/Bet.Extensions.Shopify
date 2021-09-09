@@ -763,7 +763,7 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </para>
         /// </summary>
         [JsonPropertyName("shipping_address")]
-        public IEnumerable<OrderAddress>? ShippingAddress { get; set; }
+        public OrderAddress? ShippingAddress { get; set; }
 
         /// <summary>
         /// An array of <see cref="OrderShippingLine"/> objects, each of which details the shipping methods used.

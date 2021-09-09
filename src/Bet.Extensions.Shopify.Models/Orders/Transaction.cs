@@ -112,7 +112,7 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// The origin of the transaction. Set to "external" to create a cash transaction for the associated order.
         /// </summary>
         /// <remarks>
-        /// POST /admin/api/2021-07/orders/{order_id}/transactions.json
+        /// POST /admin/api/2021-07/orders/{order_id}/transactions.json.
         /// </remarks>
         [JsonPropertyName("source")]
         public string? Source { get; set; }

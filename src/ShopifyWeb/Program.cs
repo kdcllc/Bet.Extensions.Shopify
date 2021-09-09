@@ -1,11 +1,17 @@
 ﻿using System.Text;
+using System.Text.Json;
 
+using Bet.Extensions.Shopify;
 using Bet.Extensions.Shopify.Abstractions.Options;
+using Bet.Extensions.Shopify.Models.Fulfillments;
+using Bet.Extensions.Shopify.Models.Orders;
 using Bet.Extensions.Shopify.Models.Products;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 
+using ShopifyWeb;
 using ShopifyWeb.Events.Products;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,10 +55,15 @@ builder.Services.AddShopifyHmacValidator((options, sp) =>
 {
     options.WebHookPaths.Add("/OrderWebhook");
     options.WebHookPaths.Add("/api​/Webhook​/Order");
+
+    options.WebHookPaths.Add("/webhooks");
+
+    // options.WebHookPaths.Add("/CarrierService");
 });
 
 builder.Services.AddShopifyWebHooks()
-        .AddWebhook<ProductCreateEventHandler, Product>("products/create", "products/update");
+        .AddWebhook<ProductWebhookHandler, Product>("products/create", "products/update")
+        .AddWebhook<OrderWebhookHandler, Order>("orders/cancelled", "orders/paid");
 
 var app = builder.Build();
 
@@ -84,6 +95,30 @@ app.MapPost(
     {
         using var reader = new StreamReader(request.Body, Encoding.UTF8);
         return await reader.ReadToEndAsync();
+    });
+
+app.MapPost(
+    "/CarrierService",
+    (HttpRequest request, ShippingRate model) =>
+    {
+        var json = JsonSerializer.Serialize(model, SystemTextJson.Options);
+        app.Logger.LogInformation(json);
+
+        var response = new List<CarrierRate>
+        {
+            new CarrierRate
+            {
+                ServiceName = "fedex-priorityovernight",
+                ServiceCode = "3D",
+                TotalPrice = (3.10m * 100).ToString(),
+                Description = "USPS Standard Rate",
+                Currency = "USD",
+                MaxDeliveryDate = DateTimeOffset.Now,
+                MinDeliveryDate = DateTimeOffset.Now,
+            }
+        };
+
+        return new ShopifyResult(new { rates = response });
     });
 
 app.Run();
