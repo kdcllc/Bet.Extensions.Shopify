@@ -112,6 +112,7 @@ namespace Bet.Extensions.Shopify.Clients.Impl
             string? rootElement = null,
             HttpContent? content = null,
             HttpMethod? httpMethod = null,
+            Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default)
         {
             var url = parameters.CompileRequestUri(requestUri);
@@ -120,6 +121,14 @@ namespace Bet.Extensions.Shopify.Clients.Impl
             {
                 Content = content
             };
+
+            if (headers != null)
+            {
+                foreach (var item in headers)
+                {
+                    requestMessage.Headers.Add(item.Key, item.Value);
+                }
+            }
 
             var response = await _httpClient.SendAsync(requestMessage, cancellationToken);
             response.EnsureSuccessStatusCode();

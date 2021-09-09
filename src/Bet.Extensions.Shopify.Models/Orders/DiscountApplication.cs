@@ -97,7 +97,7 @@ namespace Bet.Extensions.Shopify.Models.Orders
 
         /// <summary>
         /// <para>The lines on the order, of the type defined by target_type, that the discount is allocated over. Valid values:</para>
-        /// <para>all: The discount is allocated onto all lines</para>
+        /// <para>all: The discount is allocated onto all lines.</para>
         /// <para>entitled: The discount is allocated only onto lines it is entitled for.</para>
         /// <para>explicit: The discount is allocated onto explicitly selected lines.</para>
         /// <para>

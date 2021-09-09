@@ -53,6 +53,7 @@ namespace Bet.Extensions.Shopify.Clients
         /// <param name="rootElement"></param>
         /// <param name="content"></param>
         /// <param name="httpMethod"></param>
+        /// <param name="headers"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<T?> ExecuteAsync<T>(
@@ -61,6 +62,7 @@ namespace Bet.Extensions.Shopify.Clients
             string? rootElement = null,
             HttpContent? content = null,
             HttpMethod? httpMethod = null,
+            Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>

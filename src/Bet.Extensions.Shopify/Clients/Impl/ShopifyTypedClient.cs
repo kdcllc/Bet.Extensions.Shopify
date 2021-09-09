@@ -60,6 +60,7 @@ namespace Bet.Extensions.Shopify.Clients.Impl
             string requestUri,
             FieldsQuery? query = null,
             string? rootElement = null,
+            Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default)
         {
             var parameters = query?.ToKeyValuePair();
@@ -68,6 +69,7 @@ namespace Bet.Extensions.Shopify.Clients.Impl
                 requestUri,
                 parameters,
                 rootElement: rootElement,
+                headers: headers,
                 cancellationToken: cancellationToken);
         }
 

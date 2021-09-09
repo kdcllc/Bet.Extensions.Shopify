@@ -632,7 +632,7 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// An object containing information about the payment. It has the following properties:
         /// avs_result_code: The response code from the address verification system (AVS). The code is a single letter. See this chart for the codes and their definitions.
         /// </para>
-        /// <para>credit_card_bin: The issuer identification number (IIN), formerly known as the bank identification number (BIN), of the</para>
+        /// <para>credit_card_bin: The issuer identification number (IIN), formerly known as the bank identification number (BIN), of the.</para>
         /// <para>customer's credit card. This is made up of the first few digits of the credit card number.</para>
         /// <para>credit_card_company: The name of the company who issued the customer's credit card.</para>
         /// <para>credit_card_number: The customer's credit card number, with most of the leading digits redacted.</para>
@@ -770,5 +770,152 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </summary>
         [JsonPropertyName("shipping_lines")]
         public IEnumerable<OrderShippingLine>? ShippingLines { get; set; }
+
+        /// <summary>
+        /// Where the order originated. May only be set during creation, and is not writeable thereafter.
+        /// Orders created via the API may be assigned any string of your choice except for "web", "pos", "iphone", and "android".
+        /// Default is "api".
+        /// </summary>
+        [JsonPropertyName("source_name")]
+        public string? SourceName { get; set; }
+
+        /// <summary>
+        /// The price of the order in the shop currency after discounts but before shipping, duties, taxes, and tips.
+        /// </summary>
+        [JsonPropertyName("subtotal_price")]
+        public decimal? SubtotalPrice { get; set; }
+
+        /// <summary>
+        /// The subtotal of the order in shop and presentment currencies after discounts but before shipping, duties, taxes, and tips.
+        /// </summary>
+        [JsonPropertyName("subtotal_price_set")]
+        public MoneyBag? SubtotalPriceSet { get; set; }
+
+        /// <summary>
+        /// Tags are additional short descriptors, commonly used for filtering and searching, formatted as a string of comma-separated values.
+        /// </summary>
+        [JsonPropertyName("tags")]
+        public string? Tags { get; set; }
+
+        /// <summary>
+        /// An array of <see cref="TaxLine"/> objects, each of which details the total taxes applicable to the order.
+        /// </summary>
+        [JsonPropertyName("tax_lines")]
+        public IEnumerable<TaxLine>? TaxLines { get; set; }
+
+        /// <summary>
+        /// States whether or not taxes are included in the order subtotal.
+        /// </summary>
+        [JsonPropertyName("taxes_included")]
+        public bool? TaxesIncluded { get; set; }
+
+        /// <summary>
+        /// States whether this is a test order.
+        /// </summary>
+        [JsonPropertyName("test")]
+        public bool? Test { get; set; }
+
+        /// <summary>
+        /// Unique identifier for a particular order.
+        /// </summary>
+        [JsonPropertyName("token")]
+        public string? Token { get; set; }
+
+        /// <summary>
+        /// The total amount of the discounts applied to the price of the order.
+        /// </summary>
+        [JsonPropertyName("total_discounts")]
+        public decimal? TotalDiscounts { get; set; }
+
+        /// <summary>
+        /// The total discounts applied to the price of the order in shop and presentment currencies.
+        /// </summary>
+        [JsonPropertyName("total_discounts_set")]
+        public MoneyBag? TotalDiscountsSet { get; set; }
+
+        /// <summary>
+        /// The sum of all the prices of all the items in the order.
+        /// </summary>
+        [JsonPropertyName("total_line_items_price")]
+        public decimal? TotalLineItemsPrice { get; set; }
+
+        /// <summary>
+        /// The total of all line item prices in shop and presentment currencies.
+        /// </summary>
+        [JsonPropertyName("total_line_items_price_set")]
+        public MoneyBag? TotalLineItemsPriceSet { get; set; }
+
+        /// <summary>
+        /// The total outstanding amount of the order in the shop currency.
+        /// </summary>
+        [JsonPropertyName("total_outstanding")]
+        public decimal? TotalOutstanding { get; set; }
+
+        /// <summary>
+        /// The sum of all the prices of all the items in the order, with taxes and discounts included (must be positive).
+        /// </summary>
+        [JsonPropertyName("total_price")]
+        public decimal? TotalPrice { get; set; }
+
+        /// <summary>
+        /// The total price of the order in shop and presentment currencies.
+        /// </summary>
+        [JsonPropertyName("total_price_set")]
+        public MoneyBag? TotalPriceSet { get; set; }
+
+        /// <summary>
+        /// Total USD price.
+        /// </summary>
+        [JsonPropertyName("total_price_usd")]
+        public decimal? TotalPriceUsd { get; set; }
+
+        /// <summary>
+        /// The total shipping price of the order, excluding discounts and returns, in shop and presentment currencies.
+        /// If taxes_included is set to true, then total_shipping_price_set includes taxes.
+        /// </summary>
+        [JsonPropertyName("total_shipping_price_set")]
+        public MoneyBag? TotalShippingPriceSet { get; set; }
+
+        /// <summary>
+        /// The sum of all the taxes applied to the order (must be positive).
+        /// </summary>
+        [JsonPropertyName("total_tax")]
+        public decimal? TotalTax { get; set; }
+
+        /// <summary>
+        /// The total tax applied to the order in shop and presentment currencies.
+        /// </summary>
+        [JsonPropertyName("total_tax_set")]
+        public MoneyBag? TotalTaxSet { get; set; }
+
+        /// <summary>
+        /// The sum of all the tips in the order.
+        /// </summary>
+        [JsonPropertyName("total_tip_received")]
+        public decimal? TotalTipReceived { get; set; }
+
+        /// <summary>
+        /// The sum of all the weights of the line items in the order, in grams.
+        /// </summary>summary>
+        [JsonPropertyName("total_weight")]
+        public long? TotalWeight { get; set; }
+
+        /// <summary>
+        /// The date and time when the order was last modified.
+        /// </summary>
+        [JsonPropertyName("updated_at")]
+        public DateTimeOffset? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// The unique numerical identifier for the user logged into the terminal at the time the order was processed at. Only present on orders processed at point of sale.
+        /// </summary>
+        [JsonPropertyName("user_id")]
+        public long? UserId { get; set; }
+
+        /// <summary>
+        /// The URL pointing to the order status web page, if applicable.
+        /// </summary>
+        [JsonPropertyName("order_status_url")]
+        public string? OrderStatusUrl { get; set; }
     }
 }
