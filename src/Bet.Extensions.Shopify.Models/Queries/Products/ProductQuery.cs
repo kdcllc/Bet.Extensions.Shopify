@@ -12,7 +12,7 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
     public class ProductQuery : ProductCountQuery
     {
         /// <summary>
-        /// Retrieve only those specified by a comma-separated list of order IDs.
+        /// Retrieve only those specified by a comma-separated list of Products IDs.
         /// </summary>
         [JsonPropertyName("ids")]
         public IEnumerable<long>? Ids { get; set; }

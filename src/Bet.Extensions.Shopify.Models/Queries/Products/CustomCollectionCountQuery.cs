@@ -9,7 +9,7 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
     /// <para>Query Shopify for <see cref="CustomCollection"/> endpoint.</para>
     /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/customcollection#endpoints-2021-07"/>.</para>
     /// </summary>
-    public class CustomCollectionCountQuery
+    public class CustomCollectionCountQuery : PageInfoQuery
     {
         /// <summary>
         /// Count custom collections with given title.

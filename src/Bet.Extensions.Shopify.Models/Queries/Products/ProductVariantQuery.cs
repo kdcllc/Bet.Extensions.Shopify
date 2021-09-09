@@ -9,15 +9,8 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
     /// <para>Query Shopify <see cref="ProductVariant"/> endpoint.</para>
     /// <para><see href="https://shopify.dev/api/admin/rest/reference/products/product-variant#endpoints-2021-07"/>.</para>
     /// </summary>
-    public class ProductVariantQuery : FieldsQuery
+    public class ProductVariantQuery : PageInfoQuery
     {
-        /// <summary>
-        /// <para>The number of items which should be returned.</para>
-        /// <para>Default is 50, maximum is 250.</para>
-        /// </summary>
-        [JsonPropertyName("limit")]
-        public int? Limit { get; set; }
-
         /// <summary>
         /// Restrict results to after the specified ID.
         /// </summary>
@@ -26,5 +19,11 @@ namespace Bet.Extensions.Shopify.Models.Queries.Products
 
         [JsonPropertyName("presentment_currencies")]
         public IEnumerable<string>? PresentmentCurrencies { get; set; }
+
+        /// <summary>
+        /// Return only certain fields specified by a comma-separated list of field names.
+        /// </summary>
+        [JsonPropertyName("fields")]
+        public IEnumerable<string>? Fields { get; set; }
     }
 }

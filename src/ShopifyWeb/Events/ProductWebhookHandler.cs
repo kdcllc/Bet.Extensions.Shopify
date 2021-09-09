@@ -6,11 +6,11 @@ using Bet.Extensions.Shopify.Models.Products;
 
 namespace ShopifyWeb.Events.Products
 {
-    public class ProductCreateEventHandler : IWebhookHandler<Product>
+    public class ProductWebhookHandler : IWebhookHandler<Product>
     {
-        private readonly ILogger<ProductCreateEventHandler> _logger;
+        private readonly ILogger<ProductWebhookHandler> _logger;
 
-        public ProductCreateEventHandler(ILogger<ProductCreateEventHandler> logger)
+        public ProductWebhookHandler(ILogger<ProductWebhookHandler> logger)
         {
             _logger = logger;
         }

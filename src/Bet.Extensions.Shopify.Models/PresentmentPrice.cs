@@ -8,12 +8,12 @@ namespace Bet.Extensions.Shopify.Models
         /// The price of the product variant.
         /// </summary>
         [JsonPropertyName("price")]
-        public Price? Price { get; set; }
+        public MoneyBag? Price { get; set; }
 
         /// <summary>
         /// The competitors prices for the same item.
         /// </summary>
         [JsonPropertyName("compare_at_price")]
-        public Price? CompareAtPrice { get; set; }
+        public MoneyBag? CompareAtPrice { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // register generic types for clients.
             services.AddTransient(typeof(IShopifyTypedClient<,,>), typeof(ShopifyTypedClient<,,>));
 
-            services.AddHttpClient<IShopifyBaseClient, ShopifyClient>()
+            services.AddHttpClient<IShopifyBaseClient, ShopifyBaseClient>()
               .ConfigureHttpClient((sp, client) =>
               {
                   var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
               {
                   var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
                   var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
-                  var logger = loggerFactory.CreateLogger(request?.RequestUri?.ToString() ?? nameof(ShopifyClient));
+                  var logger = loggerFactory.CreateLogger(request?.RequestUri?.ToString() ?? nameof(ShopifyBaseClient));
 
                   return PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger);
               });

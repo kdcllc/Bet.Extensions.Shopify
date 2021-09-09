@@ -12,15 +12,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Bet.Extensions.Shopify.Clients.Impl
 {
-    public class ShopifyClient : IShopifyBaseClient
+    internal class ShopifyBaseClient : IShopifyBaseClient
     {
         private readonly HttpClient _httpClient;
 
-        private readonly ILogger<ShopifyClient> _logger;
+        private readonly ILogger<ShopifyBaseClient> _logger;
 
-        public ShopifyClient(
+        public ShopifyBaseClient(
             HttpClient httpClient,
-            ILogger<ShopifyClient> logger)
+            ILogger<ShopifyBaseClient> logger)
         {
             _httpClient = httpClient ?? throw new System.ArgumentNullException(nameof(httpClient));
             _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
@@ -112,6 +112,7 @@ namespace Bet.Extensions.Shopify.Clients.Impl
             string? rootElement = null,
             HttpContent? content = null,
             HttpMethod? httpMethod = null,
+            Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default)
         {
             var url = parameters.CompileRequestUri(requestUri);
@@ -120,6 +121,14 @@ namespace Bet.Extensions.Shopify.Clients.Impl
             {
                 Content = content
             };
+
+            if (headers != null)
+            {
+                foreach (var item in headers)
+                {
+                    requestMessage.Headers.Add(item.Key, item.Value);
+                }
+            }
 
             var response = await _httpClient.SendAsync(requestMessage, cancellationToken);
             response.EnsureSuccessStatusCode();

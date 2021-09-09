@@ -66,12 +66,14 @@ namespace Bet.Extensions.Shopify.Clients
         /// <param name="requestUri"></param>
         /// <param name="query"></param>
         /// <param name="rootElement"></param>
+        /// <param name="headers"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<TData?> GetAsync(
             string requestUri,
             FieldsQuery? query = null,
             string? rootElement = null,
+            Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
