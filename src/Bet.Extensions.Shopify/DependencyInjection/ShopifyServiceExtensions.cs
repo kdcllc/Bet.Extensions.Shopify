@@ -24,35 +24,43 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IServiceCollection AddShopifyClient(
             this IServiceCollection services,
-            Action<ShopifyOptions>? configOptions = null)
+            Action<ShopifyOptions, IServiceProvider>? configOptions = null)
         {
             // configure shopify options
-            services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), configureAction: (o) => configOptions?.Invoke(o));
+            services.AddChangeTokenOptions<ShopifyOptions>(nameof(ShopifyOptions), configureAction: (o, sp) => configOptions?.Invoke(o, sp));
 
             // register generic types for clients.
             services.AddTransient(typeof(IShopifyTypedClient<,,>), typeof(ShopifyTypedClient<,,>));
 
             services.AddHttpClient<IShopifyBaseClient, ShopifyBaseClient>()
-              .ConfigureHttpClient((sp, client) =>
-              {
-                  var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
+                    .ConfigureHttpClient((sp, client) =>
+                    {
+                        var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
 
-                  client.Timeout = options.Timeout;
-                  client.BaseAddress = options.ShopAdminWithVersionUri;
+                        client.Timeout = options.Timeout;
+                        client.BaseAddress = options.ShopAdminWithVersionUri;
 
-                  client.DefaultRequestHeaders.Add("X-Shopify-Access-Token", $"{options.ShopAccessToken}");
-              })
+                        client.DefaultRequestHeaders.Add("X-Shopify-Access-Token", $"{options.ShopAccessToken}");
+                    })
 
-              // transient error retry 5 times.
-              .AddPolicyHandler(Policy.Handle<HttpRequestException>().OrTransientHttpStatusCode().RetryAsync(5))
-              .AddPolicyHandler((sp, request) =>
-              {
-                  var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
-                  var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
-                  var logger = loggerFactory.CreateLogger(request?.RequestUri?.ToString() ?? nameof(ShopifyBaseClient));
+                    // transient error retry x times.
+                    .AddPolicyHandler((sp, request) =>
+                    {
+                        var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
 
-                  return PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger);
-              });
+                        return Policy.Handle<HttpRequestException>()
+                                     .OrTransientHttpStatusCode()
+                                     .RetryAsync(options.ResilienceOptions.RetryCount)
+                                     .WithPolicyKey("ShopifyTransientHttpPolicy");
+                    })
+                    .AddPolicyHandler((sp, request) =>
+                    {
+                        var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
+                        var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
+                        var logger = loggerFactory.CreateLogger(request?.RequestUri?.ToString() ?? nameof(ShopifyBaseClient));
+
+                        return PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger).WithPolicyKey("ShopifyLeakyBuketPolicy");
+                    });
 
             return services;
         }

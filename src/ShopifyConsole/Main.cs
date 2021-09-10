@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 
 using Bet.Extensions.Shopify.Clients;
 using Bet.Extensions.Shopify.Models;
+using Bet.Extensions.Shopify.Models.Metafields;
 using Bet.Extensions.Shopify.Models.Products;
+using Bet.Extensions.Shopify.Models.Queries;
+using Bet.Extensions.Shopify.Models.Queries.Metafields;
 using Bet.Extensions.Shopify.Models.Queries.Products;
 
 using Microsoft.Extensions.Configuration;
@@ -17,15 +20,18 @@ namespace ShopifyConsole
     {
         private readonly ILogger<Main> _logger;
         private readonly IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> _productClient;
+        private readonly IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> _metafield;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
         public Main(
             IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> productClient,
+            IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> metafield,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)
         {
             _productClient = productClient ?? throw new ArgumentNullException(nameof(productClient));
+            _metafield = metafield;
             _applicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -40,6 +46,8 @@ namespace ShopifyConsole
             // use this token for stopping the services
             var cancellationToken = _applicationLifetime.ApplicationStopping;
             cancellationToken.ThrowIfCancellationRequested();
+
+            var shopMetadata = await _metafield.ListAsync("metafields.json", "metafields", cancellationToken: cancellationToken);
 
             var productQuery = new ProductQuery
             {

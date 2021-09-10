@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IMain, Main>();
 
-            services.AddShopifyClient();
+            services.AddShopifyClient((o, s) => { });
         }
     }
 }
