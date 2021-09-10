@@ -1,8 +1,13 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Bet.AspNetCore.Shopify.Middleware.Webhooks;
 using Bet.Extensions.Shopify;
 using Bet.Extensions.Shopify.Models.Products;
+
+using Microsoft.Extensions.Logging;
 
 namespace ShopifyWeb.Events.Products
 {

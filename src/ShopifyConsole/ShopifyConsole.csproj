@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>dotnet-shopifyconsole-f92d0b57-7961-4d28-a30d-9eb94c6abf7f</UserSecretsId>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>f92d0b57-7961-4d28-a30d-9eb94c6abf7f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

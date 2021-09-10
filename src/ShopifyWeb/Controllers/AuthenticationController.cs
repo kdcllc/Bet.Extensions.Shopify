@@ -1,4 +1,6 @@
-﻿using Bet.AspNetCore.Shopify.OAuth;
+﻿using System.Threading.Tasks;
+
+using Bet.AspNetCore.Shopify.OAuth;
 using Bet.Extensions.Shopify.Abstractions.Options;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -41,7 +43,7 @@ namespace ShopifyWeb.Controllers
 
         [HttpGet("/signout")]
         [HttpPost("/signout")]
-        public async Task<IActionResult> SignOutCurrentUser()
+        public IActionResult SignOutCurrentUser()
         {
             // Instruct the cookies middleware to delete the local cookie created
             // when the user agent is redirected from the Shopify external identity provider

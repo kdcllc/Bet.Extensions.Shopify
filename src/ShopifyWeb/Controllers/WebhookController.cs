@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 using Bet.AspNetCore.Shopify.Middleware.Hmac;
 

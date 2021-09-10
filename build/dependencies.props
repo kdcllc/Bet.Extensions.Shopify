@@ -17,13 +17,15 @@
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
 		<NetCoreCommon>6.0.0-preview.*</NetCoreCommon>
-	</PropertyGroup>
+    <!--<NetCoreCommon>6.0.0-rc.*</NetCoreCommon>-->
+  </PropertyGroup>
 
 	<ItemGroup Label="NetCore">
     <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreCommon)" />
     <PackageReference Update="Microsoft.Extensions.Logging.Abstractions" Version="$(NetCoreCommon)" />
 		<PackageReference Update="Microsoft.Extensions.Logging" Version="$(NetCoreCommon)" />
-	</ItemGroup>
+    <PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(NetCoreVersion)" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Update="System.Text.Json" Version="$(NetCoreCommon)" />
@@ -68,10 +70,10 @@
 		</PackageReference>
 
 		<!-- C# 10 compliler for VSCode VS.NET works without it -->
-		<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.0-2.*">
+		<!--<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.0-2.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		</PackageReference>-->
 
 	</ItemGroup>
 

@@ -1,12 +1,20 @@
 using System;
 using System.Reflection;
 
+using Bet.Extensions.Shopify.Abstractions.Options;
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.AzureAnalytics;
+
+using ShopifyConsole;
+
+[assembly: UserSecretsId("f92d0b57-7961-4d28-a30d-9eb94c6abf7f")]
 
 // Start our smart AppHost
 AppHost.Start(args, Assembly.GetEntryAssembly()?.GetName().Name);
@@ -38,6 +46,7 @@ try
 
     using var host = AppHost
                     .CreateHostBuilder()
+                    .ConfigureHostConfiguration((builder) => builder.AddUserSecrets(Assembly.GetExecutingAssembly()))
                     .ConfigureServices(ConsoleServiceCollectionExtensions.ConfigureServices)
                     .Build();
 

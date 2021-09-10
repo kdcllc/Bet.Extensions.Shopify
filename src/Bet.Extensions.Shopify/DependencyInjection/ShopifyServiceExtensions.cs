@@ -43,23 +43,21 @@ namespace Microsoft.Extensions.DependencyInjection
                         client.DefaultRequestHeaders.Add("X-Shopify-Access-Token", $"{options.ShopAccessToken}");
                     })
 
-                    // transient error retry x times.
-                    .AddPolicyHandler((sp, request) =>
-                    {
-                        var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
-
-                        return Policy.Handle<HttpRequestException>()
-                                     .OrTransientHttpStatusCode()
-                                     .RetryAsync(options.ResilienceOptions.RetryCount)
-                                     .WithPolicyKey("ShopifyTransientHttpPolicy");
-                    })
                     .AddPolicyHandler((sp, request) =>
                     {
                         var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
                         var options = sp.GetRequiredService<IOptions<ShopifyOptions>>().Value;
                         var logger = loggerFactory.CreateLogger(request?.RequestUri?.ToString() ?? nameof(ShopifyBaseClient));
 
-                        return PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger).WithPolicyKey("ShopifyLeakyBuketPolicy");
+                        var transientPolicy = Policy.Handle<HttpRequestException>()
+                                     .OrTransientHttpStatusCode()
+                                     .RetryAsync(options.ResilienceOptions.RetryCount)
+                                     .WithPolicyKey("ShopifyTransientHttpPolicy");
+
+                        var leakyBucketPolicy = PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger).WithPolicyKey("ShopifyLeakyBuketPolicy");
+
+                        var policy = Policy.WrapAsync<HttpResponseMessage>(leakyBucketPolicy, transientPolicy).WithPolicyKey("ShopifyPolicy");
+                        return policy;
                     });
 
             return services;
