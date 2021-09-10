@@ -7,7 +7,7 @@ namespace Bet.Extensions.Shopify.Abstractions.Options
         /// <summary>
         /// Shopify Shop Name.
         /// </summary>
-        public string ShopName { get; set; } = string.Empty;
+        public string ShopName { get; set; } = "custom-shop";
 
         public Uri ShopUri => new ($"https://{ShopName}.myshopify.com");
 

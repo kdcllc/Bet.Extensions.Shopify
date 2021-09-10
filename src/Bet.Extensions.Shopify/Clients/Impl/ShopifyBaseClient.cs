@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Bet.Extensions.Shopify.Clients.Impl
 {
-    internal class ShopifyBaseClient : IShopifyBaseClient
+    public sealed class ShopifyBaseClient : IShopifyBaseClient
     {
         private readonly HttpClient _httpClient;
 
