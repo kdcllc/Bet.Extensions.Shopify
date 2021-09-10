@@ -783,13 +783,13 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// The price of the order in the shop currency after discounts but before shipping, duties, taxes, and tips.
         /// </summary>
         [JsonPropertyName("subtotal_price")]
-        public decimal? SubtotalPrice { get; set; }
+        public decimal? SubTotalPrice { get; set; }
 
         /// <summary>
         /// The subtotal of the order in shop and presentment currencies after discounts but before shipping, duties, taxes, and tips.
         /// </summary>
         [JsonPropertyName("subtotal_price_set")]
-        public MoneyBag? SubtotalPriceSet { get; set; }
+        public MoneyBag? SubTotalPriceSet { get; set; }
 
         /// <summary>
         /// Tags are additional short descriptors, commonly used for filtering and searching, formatted as a string of comma-separated values.
@@ -856,6 +856,12 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </summary>
         [JsonPropertyName("total_price")]
         public decimal? TotalPrice { get; set; }
+
+        /// <summary>
+        /// Confirmed order.
+        /// </summary>
+        [JsonPropertyName("confirmed")]
+        public bool Confirmed { get; set; }
 
         /// <summary>
         /// The total price of the order in shop and presentment currencies.
