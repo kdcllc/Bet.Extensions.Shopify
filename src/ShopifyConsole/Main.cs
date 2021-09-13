@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Bet.Extensions.Shopify.Clients;
 using Bet.Extensions.Shopify.Models;
+using Bet.Extensions.Shopify.Models.Fulfillments;
+using Bet.Extensions.Shopify.Models.Inventory;
 using Bet.Extensions.Shopify.Models.Metafields;
+using Bet.Extensions.Shopify.Models.Orders;
 using Bet.Extensions.Shopify.Models.Products;
 using Bet.Extensions.Shopify.Models.Queries;
+using Bet.Extensions.Shopify.Models.Queries.Fulfillments;
 using Bet.Extensions.Shopify.Models.Queries.Metafields;
+using Bet.Extensions.Shopify.Models.Queries.Orders;
 using Bet.Extensions.Shopify.Models.Queries.Products;
 
 using Microsoft.Extensions.Configuration;
@@ -20,18 +26,30 @@ namespace ShopifyConsole
     {
         private readonly ILogger<Main> _logger;
         private readonly IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> _productClient;
-        private readonly IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> _metafield;
+        private readonly IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> _metafieldClient;
+        private readonly IShopifyTypedClient<Transaction, NoOpQurey, NoOpQurey> _transactionClient;
+        private readonly IShopifyTypedClient<Order, OrderQuery, OrderCountQuery> _orderClient;
+        private readonly IShopifyTypedClient<Fulfillment, FulfillmentQuery, FulfillmentCountQuery> _fulfillmentClient;
+        private readonly IShopifyTypedClient<Location, NoOpQurey, NoOpQurey> _locationClient;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
         public Main(
             IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> productClient,
-            IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> metafield,
+            IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> metafieldClient,
+            IShopifyTypedClient<Transaction, NoOpQurey, NoOpQurey> transactionClient,
+            IShopifyTypedClient<Order, OrderQuery, OrderCountQuery> orderClient,
+            IShopifyTypedClient<Fulfillment, FulfillmentQuery, FulfillmentCountQuery> fulfillmentClient,
+            IShopifyTypedClient<Location, NoOpQurey, NoOpQurey> locationClient,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)
         {
             _productClient = productClient ?? throw new ArgumentNullException(nameof(productClient));
-            _metafield = metafield;
+            _metafieldClient = metafieldClient;
+            _transactionClient = transactionClient ?? throw new ArgumentNullException(nameof(transactionClient));
+            _orderClient = orderClient;
+            _fulfillmentClient = fulfillmentClient;
+            _locationClient = locationClient;
             _applicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -47,7 +65,55 @@ namespace ShopifyConsole
             var cancellationToken = _applicationLifetime.ApplicationStopping;
             cancellationToken.ThrowIfCancellationRequested();
 
-            var shopMetadata = await _metafield.ListAsync("metafields.json", "metafields", cancellationToken: cancellationToken);
+            //var order = await _orderClient.GetAsync(
+            //    $"orders/{4063400525997}.json",
+            //    new OrderQuery
+            //    {
+            //        Fields = new List<string> { "tags", "id" }
+            //    },
+            //    rootElement: "order",
+            //    cancellationToken: cancellationToken);
+
+            //if (order?.Tags == null)
+            //{
+            //    order.Tags = "test";
+            //}
+            //else
+            //{
+            //    order.Tags += ",test";
+            //}
+
+            //var uOrder = await _orderClient.UpdateAsync(
+            //    $"orders/{order.Id}.json",
+            //    new { order = order },
+            //    rootElement: "order",
+            //    cancellationToken: cancellationToken);
+
+            var locations = await _locationClient.ListAsync("locations.json", rootElement: "locations", cancellationToken: cancellationToken);
+
+            var oId = 4063391252653;
+
+            var fulFillData = new Fulfillment
+            {
+                OrderId = oId,
+                TrackingCompany = "fedex",
+                TrackingNumber = "23-223-979799998",
+                LocationId = locations?.Payload?.FirstOrDefault().Id,
+                NotifyCustomer = true
+            };
+
+            var uFulFillData = await _fulfillmentClient.CreateAsync(
+                $"orders/{oId}/fulfillments.json",
+                new { fulfillment = fulFillData },
+                rootElement: "fulfillment",
+                cancellationToken: cancellationToken);
+
+            var transactions = await _transactionClient.ListAsync(
+                       $"orders/{4063710019757}/transactions.json",
+                       rootElement: "transactions",
+                       cancellationToken: cancellationToken);
+
+            var shopMetadata = await _metafieldClient.ListAsync("metafields.json", "metafields", cancellationToken: cancellationToken);
 
             var productQuery = new ProductQuery
             {

@@ -71,7 +71,7 @@ namespace Bet.Extensions.Shopify.Clients
         /// <returns></returns>
         Task<TData?> GetAsync(
             string requestUri,
-            FieldsQuery? query = null,
+            TQuery? query = null,
             string? rootElement = null,
             Dictionary<string, string>? headers = null,
             CancellationToken cancellationToken = default);

@@ -5,16 +5,28 @@ namespace Bet.Extensions.Shopify.Abstractions.Options
     public class ShopifyOptions
     {
         /// <summary>
-        /// Shopify Shop Name.
+        /// The Shopify Shop Name.
         /// </summary>
         public string ShopName { get; set; } = "custom-shop";
 
+        /// <summary>
+        /// The url for the Shopify Store.
+        /// </summary>
         public Uri ShopUri => new ($"https://{ShopName}.myshopify.com");
 
+        /// <summary>
+        /// The url with the version for Shopify Store.
+        /// </summary>
         public Uri ShopAdminWithVersionUri => new ($"{ShopUri}admin/api/{Version}/");
 
+        /// <summary>
+        /// The Shopify Admin API url.
+        /// </summary>
         public Uri ShopAdminUri => new ($"{ShopUri}admin/api/");
 
+        /// <summary>
+        /// The specific version for the Api.
+        /// </summary>
         public string Version { get; set; } = "2021-07";
 
         /// <summary>
