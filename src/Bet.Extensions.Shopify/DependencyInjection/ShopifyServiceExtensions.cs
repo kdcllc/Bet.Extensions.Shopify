@@ -39,7 +39,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
                         client.Timeout = options.Timeout;
                         client.BaseAddress = options.ShopAdminWithVersionUri;
-
                         client.DefaultRequestHeaders.Add("X-Shopify-Access-Token", $"{options.ShopAccessToken}");
                     })
 
@@ -56,8 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                         var leakyBucketPolicy = PolicyBucket.GetRetryPolicy(options.ResilienceOptions, logger).WithPolicyKey("ShopifyLeakyBuketPolicy");
 
-                        var policy = Policy.WrapAsync<HttpResponseMessage>(leakyBucketPolicy, transientPolicy).WithPolicyKey("ShopifyPolicy");
-                        return policy;
+                        return Policy.WrapAsync<HttpResponseMessage>(leakyBucketPolicy, transientPolicy).WithPolicyKey("ShopifyPolicy");
                     });
 
             return services;

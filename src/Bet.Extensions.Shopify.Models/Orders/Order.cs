@@ -175,7 +175,7 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </para>
         /// </summary>
         [JsonPropertyName("created_at")]
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
         /// <para>The three-letter code (ISO 4217 format) for the shop currency.</para>
@@ -605,6 +605,17 @@ namespace Bet.Extensions.Shopify.Models.Orders
         /// </summary>
         [JsonPropertyName("number")]
         public int? Number { get; set; }
+
+        /// <summary>
+        /// <para>The order 's position in the shop's count of orders starting at 1001. Order numbers are sequential and start at 1001.</para>
+        /// <para>
+        /// <code>
+        /// "order_number": 1001
+        /// </code>
+        /// </para>
+        /// </summary>
+        [JsonPropertyName("order_number")]
+        public int? OrderNumber { get; set; }
 
         /// <summary>
         /// <para>
