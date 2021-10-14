@@ -3,7 +3,7 @@
     /// <summary>
     /// This can be used in senarios where the query parameters are not required.
     /// </summary>
-    public class NoOpQurey
+    public class NoOpQuery
     {
     }
 }

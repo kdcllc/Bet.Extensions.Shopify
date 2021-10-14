@@ -94,9 +94,14 @@ namespace Bet.Extensions.Shopify.Clients
         /// Update a resource.
         /// </summary>
         /// <param name="requestUri"></param>
-        /// <param name="data"></param>
-        /// <param name="rootElement"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="data">
+        /// The dynamic object corresponding to the name of json element for the update.
+        /// <code>
+        /// new { product = product }
+        /// </code>
+        /// </param>
+        /// <param name="rootElement">The name of the json return element.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         Task<TData?> UpdateAsync(
             string requestUri,
