@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Bet.AspNetCore.Shopify.OAuth;
+using Bet.Extensions.Shopify.Models.Orders;
 using Bet.Extensions.Shopify.Models.Products;
-using Bet.Extensions.Shopify.Models.Queries;
 using Bet.Extensions.Shopify.Models.Queries.Products;
 
 using Xunit;
@@ -50,6 +52,16 @@ namespace Bet.Extensions.Shopify.UnitTest
             var st = new List<AuthorizationScope> { AuthorizationScope.ReadAllOrders, AuthorizationScope.ReadCustomers };
 
             // var ut = st.Select(x => x.ToSerializedString());
+        }
+
+        [Fact]
+        public void TestTransactionModel()
+        {
+            var json = File.ReadAllText(Path.Combine("Data", "Transactions.json"));
+
+            var result = JsonSerializer.Deserialize<IList<Transaction>>(json, SystemTextJson.Options);
+
+            Assert.NotNull(result);
         }
     }
 }

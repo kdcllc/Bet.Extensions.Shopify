@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\src\Bet.Extensions.Shopify\Bet.Extensions.Shopify.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Data\*.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
 </Project>

@@ -26,20 +26,20 @@ namespace ShopifyConsole
     {
         private readonly ILogger<Main> _logger;
         private readonly IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> _productClient;
-        private readonly IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> _metafieldClient;
-        private readonly IShopifyTypedClient<Transaction, NoOpQurey, NoOpQurey> _transactionClient;
+        private readonly IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQuery> _metafieldClient;
+        private readonly IShopifyTypedClient<Transaction, NoOpQuery, NoOpQuery> _transactionClient;
         private readonly IShopifyTypedClient<Order, OrderQuery, OrderCountQuery> _orderClient;
         private readonly IShopifyTypedClient<Fulfillment, FulfillmentQuery, FulfillmentCountQuery> _fulfillmentClient;
-        private readonly IShopifyTypedClient<Location, NoOpQurey, NoOpQurey> _locationClient;
+        private readonly IShopifyTypedClient<Location, NoOpQuery, NoOpQuery> _locationClient;
         private readonly IHostApplicationLifetime _applicationLifetime;
 
         public Main(
             IShopifyTypedClient<Product, ProductQuery, ProductCountQuery> productClient,
-            IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQurey> metafieldClient,
-            IShopifyTypedClient<Transaction, NoOpQurey, NoOpQurey> transactionClient,
+            IShopifyTypedClient<Metafield, MetafieldQuery, NoOpQuery> metafieldClient,
+            IShopifyTypedClient<Transaction, NoOpQuery, NoOpQuery> transactionClient,
             IShopifyTypedClient<Order, OrderQuery, OrderCountQuery> orderClient,
             IShopifyTypedClient<Fulfillment, FulfillmentQuery, FulfillmentCountQuery> fulfillmentClient,
-            IShopifyTypedClient<Location, NoOpQurey, NoOpQurey> locationClient,
+            IShopifyTypedClient<Location, NoOpQuery, NoOpQuery> locationClient,
             IHostApplicationLifetime applicationLifetime,
             IConfiguration configuration,
             ILogger<Main> logger)

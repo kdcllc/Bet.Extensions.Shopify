@@ -27,20 +27,18 @@ namespace Bet.Extensions.Shopify
                     options.RetryCount,
                     sleepDurationProvider: (retryCount, response, context) =>
                     {
-                        var delay = TimeSpan.FromSeconds(0);
+                        var delay = options.Delay;
 
                         // if an exception was thrown, this will be null
                         if (response.Result != null)
                         {
                             if (!response.Result.Headers.TryGetValues("Retry-After", out var values))
                             {
-                                return delay;
-                            }
-
-                            if (int.TryParse(values.FirstOrDefault(), out var delayInSeconds))
-                            {
-                                delay = TimeSpan.FromSeconds(delayInSeconds);
-                            }
+                                if (int.TryParse(values?.FirstOrDefault(), out var delayInSeconds))
+                                {
+                                    delay = TimeSpan.FromSeconds(delayInSeconds);
+                                }
+                           }
                         }
                         else
                         {
@@ -48,6 +46,8 @@ namespace Bet.Extensions.Shopify
                             var delayInSeconds = exponentialBackoff * options.Delay.Milliseconds;
                             delay = TimeSpan.FromMilliseconds(delayInSeconds);
                         }
+
+                        logger.LogDebug("Retry count: {retryCount} with delay {delay}", retryCount, delay);
 
                         return delay;
                     },
