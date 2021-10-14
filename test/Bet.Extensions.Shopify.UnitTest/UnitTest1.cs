@@ -57,7 +57,8 @@ namespace Bet.Extensions.Shopify.UnitTest
         [Fact]
         public void TestTransactionModel()
         {
-            var json = File.ReadAllText(@"Data\Transactions.json");
+            var json = File.ReadAllText(Path.Combine("Data", "Transactions.json"));
+
             var result = JsonSerializer.Deserialize<IList<Transaction>>(json, SystemTextJson.Options);
 
             Assert.NotNull(result);
