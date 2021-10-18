@@ -1,67 +1,62 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 using Bet.AspNetCore.Shopify.OAuth;
+using Bet.Extensions.Shopify.Models;
 using Bet.Extensions.Shopify.Models.Orders;
 using Bet.Extensions.Shopify.Models.Products;
 using Bet.Extensions.Shopify.Models.Queries.Products;
 
-using Xunit;
+namespace Bet.Extensions.Shopify.UnitTest;
 
-namespace Bet.Extensions.Shopify.UnitTest
+public class UnitTest1
 {
-    public class UnitTest1
+    [Fact]
+    public void Test1()
     {
-        [Fact]
-        public void Test1()
+        var product = new ProductQuery { Limit = 1, PageInfo = "zsdsfsjkljlkhlkh" };
+
+        var kvb = product.ToKeyValuePair();
+
+        var url = kvb.CompileRequestUri("/products");
+
+        Assert.NotEmpty(url);
+
+        Assert.NotNull(kvb);
+    }
+
+    [Fact]
+    public async Task TestJsonContent()
+    {
+        var product = new Product
         {
-            var product = new ProductQuery { Limit = 1, PageInfo = "zsdsfsjkljlkhlkh" };
+            Handle = "test-handle",
+            Images = new List<ProductImage> { new ProductImage { Src = "https://image.io" } }
+        };
 
-            var kvb = product.ToKeyValuePair();
+        var content = new JsonContent(new { product = product });
+        var uft8 = await content.ReadAsByteArrayAsync();
 
-            var url = kvb.CompileRequestUri("/products");
+        var json = Encoding.UTF8.GetString(uft8);
 
-            Assert.NotEmpty(url);
+        Assert.NotNull(json);
+    }
 
-            Assert.NotNull(kvb);
-        }
+    [Fact]
+    public void TestEnum()
+    {
+        var st = new List<AuthorizationScope> { AuthorizationScope.ReadAllOrders, AuthorizationScope.ReadCustomers };
 
-        [Fact]
-        public async Task TestJsonContent()
-        {
-            var product = new Product
-            {
-                Handle = "test-handle",
-                Images = new List<ProductImage> { new ProductImage { Src = "https://image.io" } }
-            };
+        // var ut = st.Select(x => x.ToSerializedString());
+    }
 
-            var content = new JsonContent(new { product = product });
-            var uft8 = await content.ReadAsByteArrayAsync();
+    [Fact]
+    public void TestTransactionModel()
+    {
+        var json = File.ReadAllText(Path.Combine("Data", "Transactions.json"));
 
-            var json = Encoding.UTF8.GetString(uft8);
+        var result = JsonSerializer.Deserialize<IList<Transaction>>(json, SystemTextJson.Options);
 
-            Assert.NotNull(json);
-        }
-
-        [Fact]
-        public void TestEnum()
-        {
-            var st = new List<AuthorizationScope> { AuthorizationScope.ReadAllOrders, AuthorizationScope.ReadCustomers };
-
-            // var ut = st.Select(x => x.ToSerializedString());
-        }
-
-        [Fact]
-        public void TestTransactionModel()
-        {
-            var json = File.ReadAllText(Path.Combine("Data", "Transactions.json"));
-
-            var result = JsonSerializer.Deserialize<IList<Transaction>>(json, SystemTextJson.Options);
-
-            Assert.NotNull(result);
-        }
+        Assert.NotNull(result);
     }
 }

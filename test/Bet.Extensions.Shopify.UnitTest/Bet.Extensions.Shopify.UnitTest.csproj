@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Bet.AspNetCore.Shopify\Bet.AspNetCore.Shopify.csproj" />
     <ProjectReference Include="..\..\src\Bet.Extensions.Shopify\Bet.Extensions.Shopify.csproj" />
   </ItemGroup>

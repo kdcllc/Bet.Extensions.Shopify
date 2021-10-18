@@ -8,8 +8,8 @@
 	<PropertyGroup>
 		<RunCodeAnalysis>true</RunCodeAnalysis>
 		<NetCoreCommon>3.1.*</NetCoreCommon>
-    <BetCommonVersion>3.1.11</BetCommonVersion>
-  </PropertyGroup>
+		<BetCommonVersion>4.0.0</BetCommonVersion>
+	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'netstandard2.1'">
 		<NetCoreCommon>5.0.*</NetCoreCommon>
@@ -17,39 +17,41 @@
 
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
 		<NetCoreCommon>6.0.0-rc.2.*</NetCoreCommon>
-    <!--<NetCoreCommon>6.0.0-rc.*</NetCoreCommon>-->
-  </PropertyGroup>
+		<!--<NetCoreCommon>6.0.0-rc.*</NetCoreCommon>-->
+	</PropertyGroup>
 
 	<ItemGroup Label="NetCore">
-    <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreCommon)" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Abstractions" Version="$(NetCoreCommon)" />
+		<PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreCommon)" />
+		<PackageReference Update="Microsoft.Extensions.Logging.Abstractions" Version="$(NetCoreCommon)" />
 		<PackageReference Update="Microsoft.Extensions.Logging" Version="$(NetCoreCommon)" />
-    <PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(NetCoreVersion)" />
-  </ItemGroup>
+		<PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(NetCoreVersion)" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Update="System.Text.Json" Version="$(NetCoreCommon)" />
 		<PackageReference Update="System.Net.Http.Json" Version="$(NetCoreCommon)" />
 		<PackageReference Update="Microsoft.Extensions.Http" Version="$(NetCoreCommon)" />
 		<PackageReference Update="Microsoft.Extensions.Http.Polly" Version="$(NetCoreCommon)" />
-		<PackageReference Update="Microsoft.IO.RecyclableMemoryStream" Version="2.1.2" />
+		<PackageReference Update="Microsoft.IO.RecyclableMemoryStream" Version="2.2.0" />
+		<PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+		<PackageReference Update="Swashbuckle.AspNetCore" Version="6.2.3" />
 	</ItemGroup>
 
-  <ItemGroup Label="Bet">
-    <PackageReference Update="Bet.Extensions.Options" Version="$(BetCommonVersion)" />
-    <PackageReference Update="Bet.Extensions.AzureVault" Version="$(BetCommonVersion)" />
-    <PackageReference Update="Bet.Extensions.Testing" Version="$(BetCommonVersion)" />
-    <PackageReference Update="Bet.Extensions.Logging" Version="$(BetCommonVersion)" />
-  </ItemGroup>
+	<ItemGroup Label="Bet">
+		<PackageReference Update="Bet.Extensions.Options" Version="$(BetCommonVersion)" />
+		<PackageReference Update="Bet.Extensions.AzureVault" Version="$(BetCommonVersion)" />
+		<PackageReference Update="Bet.Extensions.Testing" Version="$(BetCommonVersion)" />
+		<PackageReference Update="Bet.Extensions.Logging" Version="$(BetCommonVersion)" />
+	</ItemGroup>
 
 	<ItemGroup Label="Testing">
-		<PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+		<PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.11.0" />
 		<PackageReference Update="xunit" Version="2.4.1" />
 		<PackageReference Update="xunit.runner.visualstudio" Version="2.4.3">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Update="coverlet.collector" Version="3.0.3">
+		<PackageReference Update="coverlet.collector" Version="3.1.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
@@ -60,21 +62,14 @@
 	</ItemGroup>
 
 	<ItemGroup Label="Analyzers">
-		<PackageReference Include="Bet.CodeAnalyzers" Version="1.0.10">
+		<PackageReference Include="Bet.CodeAnalyzers" Version="1.0.12">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Bet.EditorConfig" Version="1.0.10">
+		<PackageReference Include="Bet.EditorConfig" Version="1.0.12">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-
-		<!-- C# 10 compliler for VSCode VS.NET works without it -->
-		<!--<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.0-2.*">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>-->
-
 	</ItemGroup>
 
 	<ItemGroup>

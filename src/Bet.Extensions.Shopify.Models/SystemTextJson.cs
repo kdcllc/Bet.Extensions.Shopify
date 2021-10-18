@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 
-namespace Bet.Extensions.Shopify
+namespace Bet.Extensions.Shopify.Models
 {
     public static class SystemTextJson
     {
@@ -11,7 +10,7 @@ namespace Bet.Extensions.Shopify
             Converters = { new JsonStringEnumConverter() },
             NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals,
 
-            //Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            // Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             // Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = true,
         };

@@ -1,37 +1,31 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 using Bet.AspNetCore.Shopify.Middleware.Webhooks;
-using Bet.Extensions.Shopify;
+using Bet.Extensions.Shopify.Models;
 using Bet.Extensions.Shopify.Models.Products;
 
-using Microsoft.Extensions.Logging;
+namespace ShopifyWeb.Events;
 
-namespace ShopifyWeb.Events.Products
+public class ProductWebhookHandler : IWebhookHandler<Product>
 {
-    public class ProductWebhookHandler : IWebhookHandler<Product>
+    private readonly ILogger<ProductWebhookHandler> _logger;
+
+    public ProductWebhookHandler(ILogger<ProductWebhookHandler> logger)
     {
-        private readonly ILogger<ProductWebhookHandler> _logger;
+        _logger = logger;
+    }
 
-        public ProductWebhookHandler(ILogger<ProductWebhookHandler> logger)
+    public Task<WebHookResult> HandleEventAsync(Product @event, string topicName, CancellationToken cancellationToken = default)
+    {
+        try
         {
-            _logger = logger;
+            var json = JsonSerializer.Serialize(@event, SystemTextJson.Options);
+            _logger.LogInformation("Received topic {topicName}: {json}", topicName, json);
+            return Task.FromResult(new WebHookResult());
         }
-
-        public Task<WebHookResult> HandleEventAsync(Product @event, string topicName, CancellationToken cancellationToken = default)
+        catch (Exception ex)
         {
-            try
-            {
-                var json = JsonSerializer.Serialize(@event, SystemTextJson.Options);
-                _logger.LogInformation("Received topic {topicName}: {json}", topicName, json);
-                return Task.FromResult(new WebHookResult());
-            }
-            catch (Exception ex)
-            {
-                return Task.FromResult(new WebHookResult(ex));
-            }
+            return Task.FromResult(new WebHookResult(ex));
         }
     }
 }
