@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>f92d0b57-7961-4d28-a30d-9eb94c6abf7f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bet.Extensions.Templating.Console" Version="1.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bet.Extensions.Shopify.Models\Bet.Extensions.Shopify.Models.csproj" />
+    <ProjectReference Include="..\Bet.Extensions.Shopify\Bet.Extensions.Shopify.csproj" />
+  </ItemGroup>
+</Project>

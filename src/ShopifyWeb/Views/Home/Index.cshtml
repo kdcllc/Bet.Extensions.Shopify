@@ -1,0 +1,26 @@
+﻿@using Bet.AspNetCore.Shopify.OAuth
+
+<div class="jumbotron">
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <h1>Welcome, @User.Identity.Name</h1>
+
+        <p>
+            @foreach (var claim in Context.User.Claims)
+            {
+                <div><code>@claim.Type</code>: <strong>@claim.Value</strong></div>
+            }
+        </p>
+
+        <a class="btn btn-lg btn-danger" href="/signout?returnUrl=%2F">Sign out</a>
+    }
+
+    else
+    {
+        <h1>Welcome, anonymous</h1>
+        <form action="/signin" method="post">
+            <input type="hidden" name="Provider" value="@OAuthConstants.SchemaProperty" />
+            <button class="btn btn-lg btn-success m-1" type="submit">Login</button>
+        </form>
+    }
+</div>
