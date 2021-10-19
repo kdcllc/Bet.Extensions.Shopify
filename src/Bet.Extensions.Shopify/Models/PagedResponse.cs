@@ -1,15 +1,14 @@
-﻿namespace Bet.Extensions.Shopify.Models
+﻿namespace Bet.Extensions.Shopify.Models;
+
+public class PagedResponse<T>
 {
-    public class PagedResponse<T>
+    public PagedResponse(T? payload = default, string? nextPageInfo = null)
     {
-        public PagedResponse(T? payload = default, string? nextPageInfo = null)
-        {
-            Payload = payload;
-            NextPageInfo = nextPageInfo;
-        }
-
-        public T? Payload { get; set; }
-
-        public string? NextPageInfo { get; set; }
+        Payload = payload;
+        NextPageInfo = nextPageInfo;
     }
+
+    public T? Payload { get; set; }
+
+    public string? NextPageInfo { get; set; }
 }

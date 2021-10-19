@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
+﻿namespace Bet.AspNetCore.Shopify.Middleware.Webhooks.Options;
 
-namespace Bet.AspNetCore.Shopify.Middleware.Webhooks.Options
+internal class WebhooksOptions
 {
-    internal class WebhooksOptions
-    {
-        public IList<WebhookRegistration> WebHooksRegistrations { get; } = new List<WebhookRegistration>();
+    public IList<WebhookRegistration> WebHooksRegistrations { get; } = new List<WebhookRegistration>();
 
-        public string HttpRoute { get; set; } = "/webhooks";
+    public string HttpRoute { get; set; } = "/webhooks";
 
-        public string HttpMethod { get; set; } = "POST";
+    public string HttpMethod { get; set; } = "POST";
 
-        public bool ThrowIfException { get; set; } = true;
-    }
+    public bool ThrowIfException { get; set; } = true;
 }

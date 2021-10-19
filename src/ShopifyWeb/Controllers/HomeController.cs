@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShopifyWeb.Controllers
+namespace ShopifyWeb.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    [HttpGet("/")]
+    [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+    public ActionResult Index()
     {
-        [HttpGet("/")]
-        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

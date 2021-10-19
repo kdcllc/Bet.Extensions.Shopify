@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Bet.Extensions.Shopify.Clients;
+﻿using Bet.Extensions.Shopify.Clients;
 using Bet.Extensions.Shopify.Models;
 using Bet.Extensions.Shopify.Models.Fulfillments;
 using Bet.Extensions.Shopify.Models.Inventory;
@@ -15,10 +10,6 @@ using Bet.Extensions.Shopify.Models.Queries.Fulfillments;
 using Bet.Extensions.Shopify.Models.Queries.Metafields;
 using Bet.Extensions.Shopify.Models.Queries.Orders;
 using Bet.Extensions.Shopify.Models.Queries.Products;
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ShopifyConsole
 {
@@ -65,7 +56,7 @@ namespace ShopifyConsole
             var cancellationToken = _applicationLifetime.ApplicationStopping;
             cancellationToken.ThrowIfCancellationRequested();
 
-            //var order = await _orderClient.GetAsync(
+            // var order = await _orderClient.GetAsync(
             //    $"orders/{4063400525997}.json",
             //    new OrderQuery
             //    {
@@ -74,21 +65,20 @@ namespace ShopifyConsole
             //    rootElement: "order",
             //    cancellationToken: cancellationToken);
 
-            //if (order?.Tags == null)
-            //{
+            // if (order?.Tags == null)
+            // {
             //    order.Tags = "test";
-            //}
-            //else
-            //{
+            // }
+            // else
+            // {
             //    order.Tags += ",test";
-            //}
+            // }
 
-            //var uOrder = await _orderClient.UpdateAsync(
+            // var uOrder = await _orderClient.UpdateAsync(
             //    $"orders/{order.Id}.json",
             //    new { order = order },
             //    rootElement: "order",
             //    cancellationToken: cancellationToken);
-
             var locations = await _locationClient.ListAsync("locations.json", rootElement: "locations", cancellationToken: cancellationToken);
 
             var oId = 4063391252653;
